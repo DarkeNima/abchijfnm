@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="title">🔥 Free Fire Membership Giveaway 🔥</title>
+    <title>🔥 Free Fire Membership Giveaway 🔥</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --ios-bg: #f5f5f7;
-            --ios-card: #ffffff;
-            --ios-blue: #007aff;
-            --ios-text: #1c1c1e;
-            --ios-border: #e0e0e0;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-            padding: 20px;
             margin: 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,60 +20,62 @@
         }
 
         .container {
-            background: var(--ios-card);
+            background: white;
+            padding: 25px;
             width: 100%;
             max-width: 450px;
-            padding: 30px;
             border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
             text-align: center;
         }
 
         .form-group {
             text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         input, select {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid var(--ios-border);
-            background: var(--ios-bg);
+            border: 1px solid #ccc;
             font-size: 1em;
         }
 
-        .submit-btn {
+        button {
             width: 100%;
             padding: 14px;
-            background: var(--ios-blue);
-            color: white;
+            background: #007aff;
             border: none;
+            color: white;
             border-radius: 10px;
             font-size: 1.1em;
             cursor: pointer;
+            font-weight: 600;
         }
 
-        .lang-switch {
+        .lang-box {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .lang-switch button {
-            padding: 6px 14px;
+        .lang-btn {
+            padding: 6px 12px;
             border-radius: 8px;
             border: none;
-            background: #ffffff88;
-            backdrop-filter: blur(4px);
             cursor: pointer;
+            background: #ffffff99;
+            backdrop-filter: blur(5px);
         }
 
         .active {
             background: white !important;
-            color: #007aff !important;
-            font-weight: 700;
+            font-weight: bold;
+            color: #007aff;
         }
+
     </style>
 </head>
 
@@ -88,43 +83,43 @@
 
 <div class="container">
 
-    <div class="lang-switch">
-        <button id="lang-si" class="active">සිංහල</button>
-        <button id="lang-en">English</button>
+    <div class="lang-box">
+        <button id="si-btn" class="lang-btn active">සිංහල</button>
+        <button id="en-btn" class="lang-btn">English</button>
     </div>
 
-    <h1 data-key="main_heading">💎 Free Fire VIP Membership Giveaway 💎</h1>
-    <p data-key="intro_text">Giveaway එකට එක්වීමට විස්තර පුරවන්න.</p>
+    <h2 id="title">💎 Free Fire VIP Membership Giveaway 💎</h2>
+    <p id="subtitle">Giveaway එකට එක්වීමට පහත විස්තර පුරවන්න</p>
 
     <form action="verification.html" method="GET">
 
         <div class="form-group">
-            <label data-key="label_ffid">Free Fire ID:</label>
-            <input type="text" name="ffId" data-key="placeholder_ffid" placeholder="ඔබගේ Free Fire Player ID එක" required>
+            <label id="ff-label">Free Fire ID:</label>
+            <input type="text" name="ffId" id="ff-placeholder" placeholder="ඔබගේ Free Fire ID" required>
         </div>
 
         <div class="form-group">
-            <label data-key="label_email">Email:</label>
-            <input type="email" name="email" data-key="placeholder_email" placeholder="Email එක ඇතුලත් කරන්න" required>
+            <label id="email-label">Email:</label>
+            <input type="email" name="email" id="email-placeholder" placeholder="Email එක ඇතුලත් කරන්න" required>
         </div>
 
         <div class="form-group">
-            <label data-key="label_whatsapp">WhatsApp Number:</label>
+            <label id="wa-label">WhatsApp Number:</label>
             <input type="tel" name="whatsapp" placeholder="94771234567" required>
         </div>
 
         <div class="form-group">
-            <label data-key="label_membership">Membership Select:</label>
-            <select name="membershipType" required>
-                <option value="Monthly Membership" data-key="mem_monthly">Monthly Membership</option>
-                <option value="Weekly Lite" data-key="mem_lite">Weekly Lite</option>
-                <option value="Super VIP Weekly" data-key="mem_super">Super VIP Weekly</option>
+            <label id="member-label">Membership Select:</label>
+            <select name="membershipType" id="member-options">
+                <option value="Monthly Membership" id="opt1">Monthly Membership</option>
+                <option value="Weekly Lite" id="opt2">Weekly Lite</option>
+                <option value="Super VIP Weekly" id="opt3">Super VIP Weekly</option>
             </select>
         </div>
 
-        <button class="submit-btn" data-key="submit_button">Next ➜</button>
+        <button type="submit" id="submit-btn">Next ➜</button>
 
-        <p style="font-size: 0.8em; margin-top: 10px;" data-key="terms_text">
+        <p style="font-size: 13px; margin-top: 10px;" id="terms">
             නියමයන් සහ කොන්දේසි අදාළ වේ.
         </p>
 
@@ -134,143 +129,69 @@
 
 <script>
 
-const translations = {
+const texts = {
     si: {
-        title: "🔥 Free Fire Membership Giveaway 🔥",
-        main_heading: "💎 Free Fire VIP Membership Giveaway 💎",
-        intro_text: "Giveaway එකට එක්වීමට විස්තර පුරවන්න.",
-        label_ffid: "Free Fire ID:",
-        placeholder_ffid: "ඔබගේ Free Fire Player ID එක",
-        label_email: "Email:",
-        placeholder_email: "Email එක ඇතුලත් කරන්න",
-        label_whatsapp: "WhatsApp අංකය:",
-        label_membership: "Membership එක තෝරන්න:",
-        mem_monthly: "Monthly Membership",
-        mem_lite: "Weekly Lite",
-        mem_super: "Super VIP Weekly",
-        submit_button: "ඊළඟට යන්න ➜",
-        terms_text: "නියමයන් සහ කොන්දේසි අදාළ වේ."
+        title: "💎 Free Fire VIP Membership Giveaway 💎",
+        subtitle: "Giveaway එකට එක්වීමට පහත විස්තර පුරවන්න",
+        ff: "Free Fire ID:",
+        ffph: "ඔබගේ Free Fire ID",
+        email: "Email:",
+        emailph: "Email එක ඇතුලත් කරන්න",
+        wa: "WhatsApp අංකය:",
+        mem: "Membership තෝරන්න:",
+        m1: "Monthly Membership",
+        m2: "Weekly Lite",
+        m3: "Super VIP Weekly",
+        submit: "ඊළඟට ➜",
+        terms: "නියමයන් සහ කොන්දේසි අදාළ වේ."
     },
 
     en: {
-        title: "🔥 Free Fire Membership Giveaway 🔥",
-        main_heading: "💎 Free Fire VIP Membership Giveaway 💎",
-        intro_text: "Fill the details to join the giveaway.",
-        label_ffid: "Free Fire ID:",
-        placeholder_ffid: "Enter your Free Fire Player ID",
-        label_email: "Email:",
-        placeholder_email: "Enter your Email",
-        label_whatsapp: "WhatsApp Number:",
-        label_membership: "Select Membership:",
-        mem_monthly: "Monthly Membership",
-        mem_lite: "Weekly Lite",
-        mem_super: "Super VIP Weekly",
-        submit_button: "Continue ➜",
-        terms_text: "Terms & Conditions Apply."
+        title: "💎 Free Fire VIP Membership Giveaway 💎",
+        subtitle: "Fill in the details to join the giveaway",
+        ff: "Free Fire ID:",
+        ffph: "Enter your Free Fire ID",
+        email: "Email:",
+        emailph: "Enter Email",
+        wa: "WhatsApp Number:",
+        mem: "Select Membership:",
+        m1: "Monthly Membership",
+        m2: "Weekly Lite",
+        m3: "Super VIP Weekly",
+        submit: "Next ➜",
+        terms: "Terms & Conditions Apply."
     }
 };
 
-function updateLang(lang) {
-    document.querySelectorAll("[data-key]").forEach(el => {
-        const key = el.getAttribute("data-key");
+function switchLang(lang) {
+    document.getElementById("title").textContent = texts[lang].title;
+    document.getElementById("subtitle").textContent = texts[lang].subtitle;
+    document.getElementById("ff-label").textContent = texts[lang].ff;
+    document.getElementById("ff-placeholder").placeholder = texts[lang].ffph;
+    document.getElementById("email-label").textContent = texts[lang].email;
+    document.getElementById("email-placeholder").placeholder = texts[lang].emailph;
+    document.getElementById("wa-label").textContent = texts[lang].wa;
+    document.getElementById("member-label").textContent = texts[lang].mem;
 
-        if (el.tagName === "INPUT") {
-            el.placeholder = translations[lang][key];
-        } else if (el.tagName === "TITLE") {
-            document.title = translations[lang][key];
-        } else {
-            el.textContent = translations[lang][key];
-        }
-    });
+    document.getElementById("opt1").textContent = texts[lang].m1;
+    document.getElementById("opt2").textContent = texts[lang].m2;
+    document.getElementById("opt3").textContent = texts[lang].m3;
 
-    document.getElementById("lang-si").classList.remove("active");
-    document.getElementById("lang-en").classList.remove("active");
-    document.getElementById("lang-" + lang).classList.add("active");
+    document.getElementById("submit-btn").textContent = texts[lang].submit;
+    document.getElementById("terms").textContent = texts[lang].terms;
+
+    document.getElementById("si-btn").classList.remove("active");
+    document.getElementById("en-btn").classList.remove("active");
+    document.getElementById(lang + "-btn").classList.add("active");
 }
 
-document.getElementById("lang-si").onclick = () => updateLang("si");
-document.getElementById("lang-en").onclick = () => updateLang("en");
+document.getElementById("si-btn").onclick = () => switchLang("si");
+document.getElementById("en-btn").onclick = () => switchLang("en");
 
 </script>
 
 </body>
-</html>nt.hasAttribute('placeholder')) {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
-            document.getElementById('lang-si').classList.remove('active');
-            document.getElementById('lang-en').classList.remove('active');
-            document.getElementById('lang-' + lang).classList.add('active');
-            document.documentElement.lang = lang;
-            localStorage.setItem('selectedLang', lang);
-        }
-
-        function createSnowflake() {
-            const snowContainer = document.getElementById('snowContainer');
-            if (!snowContainer) return;
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            const size = Math.random() * 5 + 2;
-            const startX = Math.random() * window.innerWidth;
-            const duration = Math.random() * 10 + 5;
-            const opacity = Math.random() * 0.7 + 0.3;
-            snowflake.style.width = size + 'px';
-            snowflake.style.height = size + 'px';
-            snowflake.style.left = startX + 'px';
-            snowflake.style.opacity = opacity;
-            snowflake.style.animationDuration = duration + 's';
-            snowflake.style.animationDelay = -Math.random() * duration + 's';
-            snowContainer.appendChild(snowflake);
-            setTimeout(() => snowflake.remove(), 20000);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-             const savedLang = localStorage.getItem('selectedLang') || 'si';
-             updateText(savedLang);
-             document.getElementById('lang-si').addEventListener('click', () => updateText('si'));
-             document.getElementById('lang-en').addEventListener('click', () => updateText('en'));
-             setInterval(createSnowflake, 300);
-        });
-    </script>
-</body>
-</html>l': 'ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න',
-                'label_membership': 'ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:',
-                'mem_monthly': 'Monthly Membership (මාසික)',
-                'mem_lite': 'Weekly Lite (සතිපතා Lite)',
-                'mem_super': 'Super VIP Weekly (සතිපතා Super VIP)',
-                'submit_button': '🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න',
-                'terms_text': 'නියමයන් සහ කොන්දේසි අදාළ වේ.',
-                'lang_si': 'සිංහල',
-                'lang_en': 'English'
-            },
-            'en': {
-                'title': '🔥 Free Fire Membership Giveaway 🔥',
-                'main_heading': '💎 Free Fire VIP Membership Giveaway 💎',
-                'intro_text': 'Fill in the details to join the Giveaway. Proceed to the next step to confirm your participation.',
-                'label_ffid': 'Free Fire ID:',
-                'placeholder_ffid': 'Enter your Free Fire Player ID',
-                'label_email': 'Email Address:',
-                'placeholder_email': 'Enter your Email for results notification',
-                'label_membership': 'Select the Membership type you wish to win:',
-                'mem_monthly': 'Monthly Membership',
-                'mem_lite': 'Weekly Lite',
-                'mem_super': 'Super VIP Weekly',
-                'submit_button': '🎁 Proceed to participate in the Giveaway',
-                'terms_text': 'Terms and Conditions Apply.',
-                'lang_si': 'Sinhala',
-                'lang_en': 'English'
-            }
-        };
-
-        // --- භාෂා මාරු කිරීමේ කාර්යය ---
-        function updateText(lang) {
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'TITLE') {
+                </html>      if (element.tagName === 'TITLE') {
                         document.title = translations[lang][key];
                     } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
                         element.placeholder = translations[lang][key];
