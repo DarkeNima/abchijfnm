@@ -13,6 +13,19 @@
         .share-instructions { background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
         .share-instructions p { margin: 10px 0; font-size: 1.1em; }
         .share-instructions strong { color: #ff6b6b; font-size: 1.5em; }
+        
+        /* New Section for Displaying User Info */
+        .user-info { 
+            text-align: left; 
+            margin-bottom: 20px; 
+            padding: 10px 20px;
+            background-color: #3e3e6b;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        .user-info p { margin: 5px 0; color: #cccccc; }
+        .user-info strong { color: #ffffff; font-weight: 700; }
+
         .whatsapp-btn { background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; text-decoration: none; display: block; margin-top: 20px; }
         .whatsapp-btn:hover { background-color: #128C7E; }
         .status-message { margin-top: 30px; padding: 15px; border-radius: 5px; font-weight: bold; display: none; }
@@ -27,6 +40,14 @@
 <body>
     <div class="container">
         <h1 id="mainTitle">🚀 තහවුරු කිරීමේ පියවර 🚀</h1>
+
+        <div class="user-info">
+            <p><strong>ඔබේ තොරතුරු:</strong></p>
+            <p>ID: <span id="displayFFId">N/A</span></p>
+            <p>Name: <span id="displayName">N/A</span></p>
+            <p>Region: <span id="displayRegion">N/A</span></p>
+            <p>Membership: <span id="displayMembership">N/A</span></p>
+        </div>
         
         <div id="pendingView">
             <div class="share-instructions">
@@ -61,17 +82,33 @@
             const successView = document.getElementById('successView');
             const progressBar = document.getElementById('progressBar');
             const mainTitle = document.getElementById('mainTitle');
-
-            // 1. URL එකේ ඇති Free Fire ID ලබා ගැනීම 
-            const urlParams = new URLSearchParams(window.location.search);
-            const ffId = urlParams.get('ffId');
-            const membershipType = urlParams.get('membershipType');
             
-            // 2. WhatsApp Share Link එක සැකසීම
+            // Display elements
+            const displayFFId = document.getElementById('displayFFId');
+            const displayName = document.getElementById('displayName');
+            const displayRegion = document.getElementById('displayRegion');
+            const displayMembership = document.getElementById('displayMembership');
+
+            // 1. URL එකේ ඇති Free Fire ID සහ අනෙකුත් දත්ත ලබා ගැනීම 
+            const urlParams = new URLSearchParams(window.location.search);
+            const ffId = urlParams.get('ffId') || 'N/A';
+            const playerName = urlParams.get('playerName') || 'N/A'; // නව දත්ත
+            const playerRegion = urlParams.get('playerRegion') || 'N/A'; // නව දත්ත
+            const membershipType = urlParams.get('membershipType') || 'N/A';
+            
+            // 1B. දත්ත පිටුවෙහි පෙන්වීම
+            displayFFId.textContent = ffId;
+            displayName.textContent = playerName;
+            displayRegion.textContent = playerRegion;
+            displayMembership.textContent = membershipType;
+
+
+            // 2. WhatsApp Share Link එක සැකසීම - Player Name සහ Region ඇතුළත් කිරීම
             // සටහන: ඔබේ සැබෑ වෙබ් අඩවියේ URL එක (https://ghjjncgj.vercel.app/) භාවිතා කරන්න.
             const giveawayURL = window.location.origin + "/index.html"; 
             const shareText = encodeURIComponent(
                 "🔥 Free Fire Membership Giveaway! 🔥\n" +
+                "ක්‍රීඩකයා: " + playerName + " (" + playerRegion + " Region)\n" + // නව තොරතුරු එකතු කර ඇත
                 "මට " + membershipType + " එකක් දිනා ගන්න අවස්ථාවක් ලැබුණා! ඔබත් ඉක්මනින්ම සහභාගී වන්න.\n" +
                 "➡️ Link එක: " + giveawayURL
             );
@@ -113,4 +150,4 @@
         });
     </script>
 </body>
-              </html>
+</html>
