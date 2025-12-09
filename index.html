@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title data-key="title">🔥 Free Fire Membership Giveaway 🔥</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------------------- */
+        /* 1. iOS Style & General Layout (CSS) */
+        /* ------------------------------------- */
+        :root {
+            --ios-bg: #f5f5f7;
+            --ios-card: #ffffff;
+            --ios-blue: #007aff;
+            --ios-text: #1c1c1e;
+            --ios-border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            color: var(--ios-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background-color: var(--ios-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* ------------------------------------- */
+        /* 2. Snow Animation (CSS) */
+        /* ------------------------------------- */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* ------------------------------------- */
+        /* 3. Typography & Elements */
+        /* ------------------------------------- */
+        h1 {
+            color: var(--ios-blue);
+            margin-bottom: 5px;
+            font-size: 1.6em;
+            font-weight: 700;
+        }
+
+        p {
+            color: #6d6d72;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+            background-color: var(--ios-card);
+            padding: 0;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--ios-text);
+            font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--ios-border);
+            border-radius: 8px;
+            background-color: var(--ios-bg);
+            color: var(--ios-text);
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--ios-blue);
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+        }
+
+        /* Membership Options (List Style) */
+        .membership-options {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--ios-border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--ios-border);
+            background-color: var(--ios-card);
+        }
+        
+        .radio-option:last-child {
+            border-bottom: none;
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--ios-border);
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .radio-option input[type="radio"]:checked {
+            border-color: var(--ios-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+        }
+
+        .radio-option input[type="radio"]:checked::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--ios-blue);
+            border-radius: 50%;
+        }
+
+        .radio-option label {
+            flex-grow: 1;
+            margin: 0;
+            font-weight: 400;
+            color: var(--ios-text);
+        }
+
+        /* Submit Button (Call to Action) */
+        .submit-btn {
+            background-color: var(--ios-blue);
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            background-color: #005bb5;
+            transform: translateY(-1px);
+        }
+
+        .terms {
+            font-size: 0.8em;
+            color: #8c8cbf;
+            margin-top: 15px;
+        }
+        
+        /* Language Switcher */
+        .lang-switch { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px;
+            z-index: 20;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .lang-switch button { 
+            background-color: transparent; 
+            color: #ffffff; 
+            border: none; 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        .lang-switch button.active { 
+            background-color: var(--ios-card); 
+            color: var(--ios-blue);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="snow-container" id="snowContainer"></div>
+
+    <div class="lang-switch">
+        <button id="lang-si" data-lang="si" class="active">සිංහල</button>
+        <button id="lang-en" data-lang="en">English</button>
+    </div>
+
+    <div class="container">
+        <h1 data-key="main_heading">💎 Free Fire VIP Membership Giveaway 💎</h1>
+        <p data-key="intro_text">Giveaway එකට එක්වීමට විස්තර පුරවන්න. ඔබගේ සහභාගීත්වය තහවුරු කිරීමට ඊළඟ පියවරට යන්න.</p>
+        
+        <form id="giveawayForm" action="verification.html" method="GET">
+            <div class="form-group">
+                <label for="ffId" data-key="label_ffid">Free Fire ID:</label>
+                <input type="text" id="ffId" name="ffId" data-key="placeholder_ffid" placeholder="ඔබගේ Free Fire Player ID එක ඇතුලත් කරන්න" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" data-key="label_email">Email ලිපිනය:</label>
+                <input type="email" id="email" name="email" data-key="placeholder_email" placeholder="ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න" required>
+            </div>
+            
+            <div class="form-group">
+                <label data-key="label_membership">ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:</label>
+                
+                <div class="membership-options">
+                    <div class="radio-option">
+                        <input type="radio" id="monthly" name="membershipType" value="Monthly Membership" required>
+                        <label for="monthly" data-key="mem_monthly">Monthly Membership (මාසික)</label>
+                    </div>
+                    
+                    <div class="radio-option">
+                        <input type="radio" id="weeklyLite" name="membershipType" value="Weekly Lite" required>
+                        <label for="weeklyLite" data-key="mem_lite">Weekly Lite (සතිපතා Lite)</label>
+                    </div>
+                    
+                    <div class="radio-option">
+                        <input type="radio" id="superVipWeekly" name="membershipType" value="Super VIP Weekly" required>
+                        <label for="superVipWeekly" data-key="mem_super">Super VIP Weekly (සතිපතා Super VIP)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn" data-key="submit_button">🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න</button>
+            
+            <p class="terms" data-key="terms_text">නියමයන් සහ කොන්දේසි අදාළ වේ.</p>
+        </form>
+    </div>
+    
+    <script>
+        const translations = {
+            'si': {
+                'title': '🔥 Free Fire Membership Giveaway 🔥',
+                'main_heading': '💎 Free Fire VIP Membership Giveaway 💎',
+                'intro_text': 'Giveaway එකට එක්වීමට විස්තර පුරවන්න. ඔබගේ සහභාගීත්වය තහවුරු කිරීමට ඊළඟ පියවරට යන්න.',
+                'label_ffid': 'Free Fire ID:',
+                'placeholder_ffid': 'ඔබගේ Free Fire Player ID එක ඇතුලත් කරන්න',
+                'label_email': 'Email ලිපිනය:',
+                'placeholder_email': 'ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න',
+                'label_membership': 'ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:',
+                'mem_monthly': 'Monthly Membership (මාසික)',
+                'mem_lite': 'Weekly Lite (සතිපතා Lite)',
+                'mem_super': 'Super VIP Weekly (සතිපතා Super VIP)',
+                'submit_button': '🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න',
+                'terms_text': 'නියමයන් සහ කොන්දේසි අදාළ වේ.',
+                'lang_si': 'සිංහල',
+                'lang_en': 'English'
+            },
+            'en': {
+                'title': '🔥 Free Fire Membership Giveaway 🔥',
+                'main_heading': '💎 Free Fire VIP Membership Giveaway 💎',
+                'intro_text': 'Fill in the details to join the Giveaway. Proceed to the next step to confirm your participation.',
+                'label_ffid': 'Free Fire ID:',
+                'placeholder_ffid': 'Enter your Free Fire Player ID',
+                'label_email': 'Email Address:',
+                'placeholder_email': 'Enter your Email for results notification',
+                'label_membership': 'Select the Membership type you wish to win:',
+                'mem_monthly': 'Monthly Membership',
+                'mem_lite': 'Weekly Lite',
+                'mem_super': 'Super VIP Weekly',
+                'submit_button': '🎁 Proceed to participate in the Giveaway',
+                'terms_text': 'Terms and Conditions Apply.',
+                'lang_si': 'Sinhala',
+                'lang_en': 'English'
+            }
+        };
+
+        // --- භාෂා මාරු කිරීමේ කාර්යය ---
+        function updateText(lang) {
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key];
+                    } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // භාෂා බොත්තම් සක්‍රීය/අක්‍රීය කිරීම
+            document.getElementById('lang-si').classList.remove('active');
+            document.getElementById('lang-en').classList.remove('active');
+            document.getElementById('lang-' + lang).classList.add('active');
+            document.documentElement.lang = lang;
+            localStorage.setItem('selectedLang', lang); // තේරීම මතක තබා ගැනීම
+        }
+
+        // --- Snow Animation කාර්යය ---
+        function createSnowflake() {
+            const snowContainer = document.getElementById('snowContainer');
+            if (!snowContainer) return;
+
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+
+            // ප්‍රමාණය සහ ආරම්භක ස්ථානය අහඹු ලෙස තේරීම
+            const size = Math.random() * 5 + 2;
+            const startX = Math.random() * window.innerWidth;
+            const duration = Math.random() * 10 + 5;
+            const opacity = Math.random() * 0.7 + 0.3;
+
+            snowflake.style.width = size + 'px';
+            snowflake.style.height = size + 'px';
+            snowflake.style.left = startX + 'px';
+            snowflake.style.opacity = opacity;
+            snowflake.style.animationDuration = duration + 's';
+            snowflake.style.animationDelay = -Math.random() * duration + 's'; 
+
+            snowContainer.appendChild(snowflake);
+
+            // තත්පර 20කට පසු ඉවත් කිරීම
+            setTimeout(() => {
+                snowflake.remove();
+            }, 20000);
+        }
+
+        // --- Event Listeners සහ Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+             // භාෂාව මුලින්ම පූරණය කිරීම
+             const savedLang = localStorage.getItem('selectedLang') || 'si';
+             updateText(savedLang);
+
+             // භාෂා මාරු කිරීමේ බොත්තම්
+             document.getElementById('lang-si').addEventListener('click', () => updateText('si'));
+             document.getElementById('lang-en').addEventListener('click', () => updateText('en'));
+
+             // Snowflakes නිර්මාණය කිරීම (සෑම මිලි තත්පර 300කට වරක්)
+             setInterval(createSnowflake, 300);
+        });
+    </script>
+</body>
+</html>
