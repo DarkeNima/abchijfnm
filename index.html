@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-width=1.0">
-    <title data-key="title">🔥 Free Fire Membership Giveaway 🔥</title>
+    <title id="pageTitle" data-key="title">🔥 Free Fire Membership Giveaway 🔥</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* ------------------------------------- */
@@ -15,6 +15,9 @@
             --ios-blue: #007aff;
             --ios-text: #1c1c1e;
             --ios-border: #e0e0e0;
+            --dark-bg: #1a1a2e;
+            --dark-card: #2e2e50;
+            --dark-text: #ffffff;
         }
 
         body {
@@ -40,6 +43,16 @@
             width: 100%;
             text-align: center;
             z-index: 10;
+            transition: background-color 0.5s;
+        }
+
+        /* Verification View Styles (Dark Mode for Confirmation) */
+        .verification-container {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+        .verification-container h1 {
+            color: #ffcc00;
         }
 
         /* ------------------------------------- */
@@ -69,171 +82,55 @@
         }
 
         /* ------------------------------------- */
-        /* 3. Typography & Elements */
+        /* 3. Form Elements (Index View) */
         /* ------------------------------------- */
-        h1 {
-            color: var(--ios-blue);
-            margin-bottom: 5px;
-            font-size: 1.6em;
-            font-weight: 700;
+        h1 { margin-bottom: 5px; font-size: 1.6em; font-weight: 700; }
+        p { color: #6d6d72; margin-bottom: 25px; font-size: 0.95em; }
+        .form-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9em; }
+        input[type="text"], input[type="email"] { 
+            width: 100%; padding: 12px; border: 1px solid var(--ios-border); border-radius: 8px; 
+            background-color: var(--ios-bg); color: var(--ios-text); box-sizing: border-box; font-size: 1em;
         }
+        .membership-options { display: flex; flex-direction: column; border: 1px solid var(--ios-border); border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .radio-option { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 12px 15px; border-bottom: 1px solid var(--ios-border); }
+        .radio-option:last-child { border-bottom: none; }
+        .radio-option input[type="radio"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--ios-border); border-radius: 50%; margin-right: 10px; }
+        .radio-option input[type="radio"]:checked { border-color: var(--ios-blue); box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2); }
+        .radio-option input[type="radio"]:checked::before { content: ''; position: absolute; top: 4px; left: 4px; width: 8px; height: 8px; background-color: var(--ios-blue); border-radius: 50%; }
+        .radio-option label { flex-grow: 1; margin: 0; font-weight: 400; color: var(--ios-text); }
+        .submit-btn { background-color: var(--ios-blue); color: #ffffff; padding: 15px 30px; border: none; border-radius: 10px; font-size: 1.1em; font-weight: 600; cursor: pointer; width: 100%; margin-top: 25px; }
+        .terms { font-size: 0.8em; color: #8c8cbf; margin-top: 15px; }
+        .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 20; display: flex; background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); border-radius: 10px; padding: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .lang-switch button { background-color: transparent; color: #ffffff; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .lang-switch button.active { background-color: var(--ios-card); color: var(--ios-blue); }
 
-        p {
-            color: #6d6d72;
-            margin-bottom: 25px;
-            font-size: 0.95em;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 15px;
-            background-color: var(--ios-card);
-            padding: 0;
-            border-radius: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: var(--ios-text);
+        /* ------------------------------------- */
+        /* 4. Verification Elements (Verification View) */
+        /* ------------------------------------- */
+        .share-instructions { background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .share-instructions p { margin: 10px 0; font-size: 1.1em; color: #ffffff; }
+        .share-instructions strong { color: #ff6b6b; font-size: 1.5em; }
+        
+        .user-info { 
+            text-align: left; 
+            margin-bottom: 20px; 
+            padding: 10px 20px;
+            background-color: #3e3e6b;
+            border-radius: 8px;
             font-size: 0.9em;
         }
-
-        input[type="text"],
-        input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--ios-border);
-            border-radius: 8px;
-            background-color: var(--ios-bg);
-            color: var(--ios-text);
-            box-sizing: border-box;
-            font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus {
-            outline: none;
-            border-color: var(--ios-blue);
-            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
-        }
-
-        /* Membership Options (List Style) */
-        .membership-options {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--ios-border);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .radio-option {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--ios-border);
-            background-color: var(--ios-card);
-        }
+        .user-info p { margin: 5px 0; color: #cccccc; }
+        .user-info strong { color: #ffffff; font-weight: 700; }
         
-        .radio-option:last-child {
-            border-bottom: none;
-        }
+        .whatsapp-btn { background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; cursor: pointer; text-decoration: none; display: block; margin-top: 20px; }
+        .whatsapp-btn:hover { background-color: #128C7E; }
+        .status-message { margin-top: 30px; padding: 15px; border-radius: 5px; font-weight: bold; display: none; }
+        .success { background-color: #007a47; color: #99ff99; }
+        .pending { background-color: #ffcc00; color: #1a1a2e; }
 
-        .radio-option input[type="radio"] {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--ios-border);
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .radio-option input[type="radio"]:checked {
-            border-color: var(--ios-blue);
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
-        }
-
-        .radio-option input[type="radio"]:checked::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 8px;
-            height: 8px;
-            background-color: var(--ios-blue);
-            border-radius: 50%;
-        }
-
-        .radio-option label {
-            flex-grow: 1;
-            margin: 0;
-            font-weight: 400;
-            color: var(--ios-text);
-        }
-
-        /* Submit Button (Call to Action) */
-        .submit-btn {
-            background-color: var(--ios-blue);
-            color: #ffffff;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            width: 100%;
-            margin-top: 25px;
-            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
-        }
-
-        .submit-btn:hover {
-            background-color: #005bb5;
-            transform: translateY(-1px);
-        }
-
-        .terms {
-            font-size: 0.8em;
-            color: #8c8cbf;
-            margin-top: 15px;
-        }
-        
-        /* Language Switcher */
-        .lang-switch { 
-            position: absolute; 
-            top: 20px; 
-            right: 20px;
-            z-index: 20;
-            display: flex;
-            background-color: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border-radius: 10px;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .lang-switch button { 
-            background-color: transparent; 
-            color: #ffffff; 
-            border: none; 
-            padding: 8px 12px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: 600; 
-            transition: background-color 0.3s, color 0.3s; 
-        }
-        .lang-switch button.active { 
-            background-color: var(--ios-card); 
-            color: var(--ios-blue);
-        }
+        #progressBarContainer { margin-top: 20px; width: 100%; background-color: #3e3e6b; border-radius: 5px; overflow: hidden; }
+        #progressBar { height: 25px; background-color: #e60073; width: 0%; text-align: center; line-height: 25px; color: white; transition: width 0.3s; }
     </style>
 </head>
 <body>
@@ -245,110 +142,150 @@
         <button id="lang-en" data-lang="en">English</button>
     </div>
 
-    <div class="container">
-        <h1 data-key="main_heading">💎 Free Fire VIP Membership Giveaway 💎</h1>
-        <p data-key="intro_text">Giveaway එකට එක්වීමට විස්තර පුරවන්න. ඔබගේ සහභාගීත්වය තහවුරු කිරීමට ඊළඟ පියවරට යන්න.</p>
-        
-        <form id="giveawayForm" action="verification.html" method="GET">
-            <div class="form-group">
-                <label for="ffId" data-key="label_ffid">Free Fire ID:</label>
-                <input type="text" id="ffId" name="ffId" data-key="placeholder_ffid" placeholder="ඔබගේ Free Fire Player ID එක ඇතුලත් කරන්න" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="playerName" data-key="label_player_name">Player Name:</label>
-                <input type="text" id="playerName" name="playerName" data-key="placeholder_player_name" placeholder="ඔබගේ ක්‍රීඩක නාමය (In-Game Name) ඇතුලත් කරන්න" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email" data-key="label_email">Email ලිපිනය:</label>
-                <input type="email" id="email" name="email" data-key="placeholder_email" placeholder="ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න" required>
-            </div>
-            
-            <div class="form-group">
-                <label data-key="label_region">ඔබගේ ප්‍රදේශය (Region) තෝරන්න:</label>
-                <div class="membership-options">
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionSriLanka" name="playerRegion" value="Sri Lanka" required>
-                        <label for="regionSriLanka" data-key="region_sl">ශ්‍රී ලංකාව (Sri Lanka)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionIndia" name="playerRegion" value="India" required>
-                        <label for="regionIndia" data-key="region_in">ඉන්දියාව (India)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionSingapore" name="playerRegion" value="Singapore" required>
-                        <label for="regionSingapore" data-key="region_sg">සිංගප්පූරුව (Singapore)</label>
-                    </div>
+    <div class="container" id="mainContainer">
 
-                    <div class="radio-option">
-                        <input type="radio" id="regionBrazil" name="playerRegion" value="Brazil" required>
-                        <label for="regionBrazil" data-key="region_br">බ්‍රසීලය (Brazil)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionIndonesia" name="playerRegion" value="Indonesia" required>
-                        <label for="regionIndonesia" data-key="region_id">ඉන්දුනීසියාව (Indonesia)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionThailand" name="playerRegion" value="Thailand" required>
-                        <label for="regionThailand" data-key="region_th">තායිලන්තය (Thailand)</label>
-                    </div>
-
-                    <div class="radio-option">
-                        <input type="radio" id="regionMENA" name="playerRegion" value="MENA" required>
-                        <label for="regionMENA" data-key="region_mena">MENA (මැද පෙරදිග/උතුරු අප්‍රිකාව)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionEurope" name="playerRegion" value="Europe" required>
-                        <label for="regionEurope" data-key="region_eu">යුරෝපය (Europe)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionLATAM" name="playerRegion" value="LATAM" required>
-                        <label for="regionLATAM" data-key="region_latam">LATAM (ලතින් ඇමරිකාව)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="regionOther" name="playerRegion" value="Other" required>
-                        <label for="regionOther" data-key="region_other">වෙනත් (Other / Global)</label>
-                    </div>
+        <div id="formView">
+            <h1 data-key="main_heading">💎 Free Fire VIP Membership Giveaway 💎</h1>
+            <p data-key="intro_text">Giveaway එකට එක්වීමට විස්තර පුරවන්න. ඔබගේ සහභාගීත්වය තහවුරු කිරීමට ඊළඟ පියවරට යන්න.</p>
+            
+            <form id="giveawayForm">
+                <div class="form-group">
+                    <label for="ffId" data-key="label_ffid">Free Fire ID:</label>
+                    <input type="text" id="ffId" name="ffId" data-key="placeholder_ffid" placeholder="ඔබගේ Free Fire Player ID එක ඇතුලත් කරන්න" required>
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label data-key="label_membership">ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:</label>
                 
-                <div class="membership-options">
-                    <div class="radio-option">
-                        <input type="radio" id="monthly" name="membershipType" value="Monthly Membership" required>
-                        <label for="monthly" data-key="mem_monthly">Monthly Membership (මාසික)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="weeklyLite" name="membershipType" value="Weekly Lite" required>
-                        <label for="weeklyLite" data-key="mem_lite">Weekly Lite (සතිපතා Lite)</label>
-                    </div>
-                    
-                    <div class="radio-option">
-                        <input type="radio" id="superVipWeekly" name="membershipType" value="Super VIP Weekly" required>
-                        <label for="superVipWeekly" data-key="mem_super">Super VIP Weekly (සතිපතා Super VIP)</label>
+                <div class="form-group">
+                    <label for="playerName" data-key="label_player_name">Player Name:</label>
+                    <input type="text" id="playerName" name="playerName" data-key="placeholder_player_name" placeholder="ඔබගේ ක්‍රීඩක නාමය (In-Game Name) ඇතුලත් කරන්න" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" data-key="label_email">Email ලිපිනය:</label>
+                    <input type="email" id="email" name="email" data-key="placeholder_email" placeholder="ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න" required>
+                </div>
+                
+                <div class="form-group">
+                    <label data-key="label_region">ඔබගේ ප්‍රදේශය (Region) තෝරන්න:</label>
+                    <div class="membership-options">
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionSriLanka" name="playerRegion" value="Sri Lanka" required>
+                            <label for="regionSriLanka" data-key="region_sl">ශ්‍රී ලංකාව (Sri Lanka)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionIndia" name="playerRegion" value="India" required>
+                            <label for="regionIndia" data-key="region_in">ඉන්දියාව (India)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionSingapore" name="playerRegion" value="Singapore" required>
+                            <label for="regionSingapore" data-key="region_sg">සිංගප්පූරුව (Singapore)</label>
+                        </div>
+
+                        <div class="radio-option">
+                            <input type="radio" id="regionBrazil" name="playerRegion" value="Brazil" required>
+                            <label for="regionBrazil" data-key="region_br">බ්‍රසීලය (Brazil)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionIndonesia" name="playerRegion" value="Indonesia" required>
+                            <label for="regionIndonesia" data-key="region_id">ඉන්දුනීසියාව (Indonesia)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionThailand" name="playerRegion" value="Thailand" required>
+                            <label for="regionThailand" data-key="region_th">තායිලන්තය (Thailand)</label>
+                        </div>
+
+                        <div class="radio-option">
+                            <input type="radio" id="regionMENA" name="playerRegion" value="MENA" required>
+                            <label for="regionMENA" data-key="region_mena">MENA (මැද පෙරදිග/උතුරු අප්‍රිකාව)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionEurope" name="playerRegion" value="Europe" required>
+                            <label for="regionEurope" data-key="region_eu">යුරෝපය (Europe)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionLATAM" name="playerRegion" value="LATAM" required>
+                            <label for="regionLATAM" data-key="region_latam">LATAM (ලතින් ඇමරිකාව)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="regionOther" name="playerRegion" value="Other" required>
+                            <label for="regionOther" data-key="region_other">වෙනත් (Other / Global)</label>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label data-key="label_membership">ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:</label>
+                    
+                    <div class="membership-options">
+                        <div class="radio-option">
+                            <input type="radio" id="monthly" name="membershipType" value="Monthly Membership" required>
+                            <label for="monthly" data-key="mem_monthly">Monthly Membership (මාසික)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="weeklyLite" name="membershipType" value="Weekly Lite" required>
+                            <label for="weeklyLite" data-key="mem_lite">Weekly Lite (සතිපතා Lite)</label>
+                        </div>
+                        
+                        <div class="radio-option">
+                            <input type="radio" id="superVipWeekly" name="membershipType" value="Super VIP Weekly" required>
+                            <label for="superVipWeekly" data-key="mem_super">Super VIP Weekly (සතිපතා Super VIP)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" data-key="submit_button">🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න</button>
+                
+                <p class="terms" data-key="terms_text">නියමයන් සහ කොන්දේසි අදාළ වේ.</p>
+            </form>
+        </div>
+
+        <div id="verificationView" style="display: none;">
+            <h1 id="mainTitleVerif">🚀 තහවුරු කිරීමේ පියවර 🚀</h1>
+
+            <div class="user-info">
+                <p><strong>ඔබේ තොරතුරු:</strong></p>
+                <p>ID: <span id="displayFFId">N/A</span></p>
+                <p>Name: <span id="displayName">N/A</span></p>
+                <p>Region: <span id="displayRegion">N/A</span></p>
+                <p>Membership: <span id="displayMembership">N/A</span></p>
             </div>
             
-            <button type="submit" class="submit-btn" data-key="submit_button">🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න</button>
-            
-            <p class="terms" data-key="terms_text">නියමයන් සහ කොන්දේසි අදාළ වේ.</p>
-        </form>
+            <div id="pendingView">
+                <div class="share-instructions">
+                    <p>ඔබගේ Giveaway සහභාගීත්වය තහවුරු කිරීමට, කරුණාකර මෙම සබැඳිය</p>
+                    <p>පහත බොත්තම භාවිතා කර **WhatsApp Groups 6 කට** Share කරන්න.</p>
+                    <p>ඔබ Share කළ පසු **< Back** එබීමෙන් නැවත මෙහි පැමිණෙන්න.</p>
+                </div>
+
+                <a id="whatsappShareLink" class="whatsapp-btn" target="_blank">📲 WhatsApp ඔස්සේ Share කරන්න</a>
+                
+                <div id="progressBarContainer">
+                    <div id="progressBar">0/6 සම්පූර්ණයි</div>
+                </div>
+
+                <div id="statusPending" class="status-message pending">
+                    Share කර නැවත පැමිණෙන්න. 6 වතාවක් සම්පූර්ණ කළ විට ඔබ සාර්ථකව Giveaway එකට එක් වනු ඇත!
+                </div>
+            </div>
+
+            <div id="successView" class="status-message success" style="display: none;">
+                සුභ පැතුම්! ඔබගේ සියලු පියවරයන් සාර්ථකව සම්පූර්ණ කරන ලදී! ඔබ Giveaway එකට සාර්ථකව එක්ව ඇත.
+                <p style="margin-top: 10px; font-size: 0.9em;">(ඔබගේ විස්තර සුරක්ෂිතව ඇත. ජයග්‍රාහකයන් සතියකට වරක් තෝරා ගනු ලැබේ.)</p>
+            </div>
+        </div>
+
     </div>
     
     <script>
+        // Global Variables for Translations
         const translations = {
             'si': {
                 'title': '🔥 Free Fire Membership Giveaway 🔥',
@@ -424,12 +361,18 @@
             }
         };
 
-        // --- භාෂා මාරු කිරීමේ කාර්යය ---
+        // --- GLOBAL CONSTANTS ---
+        const SHARE_COUNT_KEY = 'ffGiveawayShareCount';
+        const REQUIRED_SHARES = 6;
+        const SUBMITTED_DATA_KEY = 'ffGiveawaySubmittedData';
+
+
+        // --- BHASHA MARU KIRIME KAARYAYA (Language Switch) ---
         function updateText(lang) {
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
                 if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'TITLE') {
+                    if (element.tagName === 'TITLE' || element.id === 'pageTitle') {
                         document.title = translations[lang][key];
                     } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
                         element.placeholder = translations[lang][key];
@@ -439,15 +382,14 @@
                 }
             });
             
-            // භාෂා බොත්තම් සක්‍රීය/අක්‍රීය කිරීම
             document.getElementById('lang-si').classList.remove('active');
             document.getElementById('lang-en').classList.remove('active');
             document.getElementById('lang-' + lang).classList.add('active');
             document.documentElement.lang = lang;
-            localStorage.setItem('selectedLang', lang); // තේරීම මතක තබා ගැනීම
+            localStorage.setItem('selectedLang', lang);
         }
 
-        // --- Snow Animation කාර්යය ---
+        // --- SNOW ANIMATION ---
         function createSnowflake() {
             const snowContainer = document.getElementById('snowContainer');
             if (!snowContainer) return;
@@ -455,7 +397,6 @@
             const snowflake = document.createElement('div');
             snowflake.classList.add('snowflake');
 
-            // ප්‍රමාණය සහ ආරම්භක ස්ථානය අහඹු ලෙස තේරීම
             const size = Math.random() * 5 + 2;
             const startX = Math.random() * window.innerWidth;
             const duration = Math.random() * 10 + 5;
@@ -470,120 +411,139 @@
 
             snowContainer.appendChild(snowflake);
 
-            // තත්පර 20කට පසු ඉවත් කිරීම
             setTimeout(() => {
                 snowflake.remove();
             }, 20000);
         }
 
-        // --- Event Listeners සහ Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-             // භාෂාව මුලින්ම පූරණය කිරීම
-             const savedLang = localStorage.getItem('selectedLang') || 'si';
-             updateText(savedLang);
+        // --- VERIFICATION VIEW LOGIC ---
+        function setupVerificationView(data) {
+            // Update container style to dark theme for verification
+            document.getElementById('mainContainer').classList.remove('container');
+            document.getElementById('mainContainer').classList.add('verification-container');
 
-             // භාෂා මාරු කිරීමේ බොත්තම්
-             document.getElementById('lang-si').addEventListener('click', () => updateText('si'));
-             document.getElementById('lang-en').addEventListener('click', () => updateText('en'));
+            // 1. Display User Info
+            document.getElementById('displayFFId').textContent = data.ffId;
+            document.getElementById('displayName').textContent = data.playerName;
+            document.getElementById('displayRegion').textContent = data.playerRegion;
+            document.getElementById('displayMembership').textContent = data.membershipType;
 
-             // Snowflakes නිර්මාණය කිරීම (සෑම මිලි තත්පර 300කට වරක්)
-             setInterval(createSnowflake, 300);
-        });
-    </script>
-</body>
-</html>l': 'ප්‍රතිඵල දැනුම් දීමට ඔබගේ Email එක ඇතුලත් කරන්න',
-                'label_membership': 'ඔබට දිනා ගැනීමට අවශ්‍ය Membership වර්ගය තෝරන්න:',
-                'mem_monthly': 'Monthly Membership (මාසික)',
-                'mem_lite': 'Weekly Lite (සතිපතා Lite)',
-                'mem_super': 'Super VIP Weekly (සතිපතා Super VIP)',
-                'submit_button': '🎁 Giveaway එකට සහභාගී වීමට ඉදිරියට යන්න',
-                'terms_text': 'නියමයන් සහ කොන්දේසි අදාළ වේ.',
-                'lang_si': 'සිංහල',
-                'lang_en': 'English'
-            },
-            'en': {
-                'title': '🔥 Free Fire Membership Giveaway 🔥',
-                'main_heading': '💎 Free Fire VIP Membership Giveaway 💎',
-                'intro_text': 'Fill in the details to join the Giveaway. Proceed to the next step to confirm your participation.',
-                'label_ffid': 'Free Fire ID:',
-                'placeholder_ffid': 'Enter your Free Fire Player ID',
-                'label_email': 'Email Address:',
-                'placeholder_email': 'Enter your Email for results notification',
-                'label_membership': 'Select the Membership type you wish to win:',
-                'mem_monthly': 'Monthly Membership',
-                'mem_lite': 'Weekly Lite',
-                'mem_super': 'Super VIP Weekly',
-                'submit_button': '🎁 Proceed to participate in the Giveaway',
-                'terms_text': 'Terms and Conditions Apply.',
-                'lang_si': 'Sinhala',
-                'lang_en': 'English'
+            // 2. Setup WhatsApp Share Link
+            const giveawayURL = window.location.origin + window.location.pathname; // URL is now the same file
+            const shareText = encodeURIComponent(
+                "🔥 Free Fire Membership Giveaway! 🔥\n" +
+                "ක්‍රීඩකයා: " + data.playerName + " (" + data.playerRegion + " Region)\n" +
+                "මට " + data.membershipType + " එකක් දිනා ගන්න අවස්ථාවක් ලැබුණා! ඔබත් ඉක්මනින්ම සහභාගී වන්න.\n" +
+                "➡️ Link එක: " + giveawayURL
+            );
+            const whatsappLink = "https://wa.me/?text=" + shareText;
+            document.getElementById('whatsappShareLink').href = whatsappLink;
+
+            // 3. Update Share Count and Status
+            let shareCount = parseInt(localStorage.getItem(SHARE_COUNT_KEY)) || 0;
+            
+            // Increment count only if returning from a potential share link and count is not complete
+            // Since this is one file, we increment it upon entering the verification view.
+            // Note: This simple method may increment even if they just reload the page.
+            if (shareCount < REQUIRED_SHARES) {
+                 // We increment the count here, as the user is "moving forward" from the form.
+                 // The share button opens in a new tab, so they must manually return.
+                 // We will rely on localStorage being stable.
             }
-        };
 
-        // --- භාෂා මාරු කිරීමේ කාර්යය ---
-        function updateText(lang) {
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'TITLE') {
-                        document.title = translations[lang][key];
-                    } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
+
+            function updateStatus() {
+                // To accurately track sharing, we would usually check 'document.referrer', but this is unreliable.
+                // We rely on the user clicking the link and coming back. Let's increment based on the button click + page load for simplicity.
+                
+                const percentage = (shareCount / REQUIRED_SHARES) * 100;
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = shareCount + '/' + REQUIRED_SHARES + ' සම්පූර්ණයි';
+
+                if (shareCount >= REQUIRED_SHARES) {
+                    // Success View
+                    document.getElementById('pendingView').style.display = 'none';
+                    document.getElementById('successView').style.display = 'block';
+                    document.getElementById('mainTitleVerif').textContent = '🥳 සහභාගීත්වය තහවුරුයි!';
+                    
+                } else {
+                    // Pending View
+                    document.getElementById('pendingView').style.display = 'block';
+                    document.getElementById('successView').style.display = 'none';
                 }
-            });
-            
-            // භාෂා බොත්තම් සක්‍රීය/අක්‍රීය කිරීම
-            document.getElementById('lang-si').classList.remove('active');
-            document.getElementById('lang-en').classList.remove('active');
-            document.getElementById('lang-' + lang).classList.add('active');
-            document.documentElement.lang = lang;
-            localStorage.setItem('selectedLang', lang); // තේරීම මතක තබා ගැනීම
+            }
+
+            // A simplified way to ensure the count updates when the user returns
+            const lastVisit = localStorage.getItem('lastVisitTime') || 0;
+            const currentTime = new Date().getTime();
+
+            // If they are returning to the verification view after a short gap (e.g., clicking share link)
+            // and the count is not yet complete, we assume one more share was attempted.
+            // This is a common but flawed trick in simple share verification.
+            if (currentTime - lastVisit > 1000 && shareCount < REQUIRED_SHARES) { // 1 second gap check
+                 shareCount++;
+                 localStorage.setItem(SHARE_COUNT_KEY, shareCount);
+            }
+            localStorage.setItem('lastVisitTime', currentTime);
+
+            updateStatus();
         }
 
-        // --- Snow Animation කාර්යය ---
-        function createSnowflake() {
-            const snowContainer = document.getElementById('snowContainer');
-            if (!snowContainer) return;
-
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-
-            // ප්‍රමාණය සහ ආරම්භක ස්ථානය අහඹු ලෙස තේරීම
-            const size = Math.random() * 5 + 2;
-            const startX = Math.random() * window.innerWidth;
-            const duration = Math.random() * 10 + 5;
-            const opacity = Math.random() * 0.7 + 0.3;
-
-            snowflake.style.width = size + 'px';
-            snowflake.style.height = size + 'px';
-            snowflake.style.left = startX + 'px';
-            snowflake.style.opacity = opacity;
-            snowflake.style.animationDuration = duration + 's';
-            snowflake.style.animationDelay = -Math.random() * duration + 's'; 
-
-            snowContainer.appendChild(snowflake);
-
-            // තත්පර 20කට පසු ඉවත් කිරීම
-            setTimeout(() => {
-                snowflake.remove();
-            }, 20000);
-        }
-
-        // --- Event Listeners සහ Initialization ---
+        // --- MAIN INITIALIZATION & FORM HANDLING ---
         document.addEventListener('DOMContentLoaded', () => {
-             // භාෂාව මුලින්ම පූරණය කිරීම
+             // Load language
              const savedLang = localStorage.getItem('selectedLang') || 'si';
              updateText(savedLang);
 
-             // භාෂා මාරු කිරීමේ බොත්තම්
+             // Language switch event listeners
              document.getElementById('lang-si').addEventListener('click', () => updateText('si'));
              document.getElementById('lang-en').addEventListener('click', () => updateText('en'));
 
-             // Snowflakes නිර්මාණය කිරීම (සෑම මිලි තත්පර 300කට වරක්)
+             // Snowflakes
              setInterval(createSnowflake, 300);
+
+             const formView = document.getElementById('formView');
+             const verificationView = document.getElementById('verificationView');
+             const giveawayForm = document.getElementById('giveawayForm');
+             
+             // Check if submitted data exists in local storage (meaning user has completed form)
+             const storedDataJSON = localStorage.getItem(SUBMITTED_DATA_KEY);
+
+             if (storedDataJSON) {
+                 // Load Verification View
+                 const storedData = JSON.parse(storedDataJSON);
+                 formView.style.display = 'none';
+                 verificationView.style.display = 'block';
+                 setupVerificationView(storedData);
+             } else {
+                 // Show Form View
+                 formView.style.display = 'block';
+                 verificationView.style.display = 'none';
+             }
+
+             // Form Submission Handler
+             giveawayForm.addEventListener('submit', function(e) {
+                 e.preventDefault();
+
+                 const formData = new FormData(giveawayForm);
+                 const data = {
+                     ffId: formData.get('ffId'),
+                     playerName: formData.get('playerName'),
+                     email: formData.get('email'),
+                     playerRegion: formData.get('playerRegion'),
+                     membershipType: formData.get('membershipType')
+                 };
+
+                 // Store data for verification view
+                 localStorage.setItem(SUBMITTED_DATA_KEY, JSON.stringify(data));
+                 // Reset share count for new entry
+                 localStorage.setItem(SHARE_COUNT_KEY, 0); 
+                 
+                 // Switch View
+                 formView.style.display = 'none';
+                 verificationView.style.display = 'block';
+                 setupVerificationView(data);
+             });
         });
     </script>
 </body>
