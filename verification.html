@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✅ Share සහ තහවුරු කරන්න</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Style */
+        body { font-family: 'Poppins', sans-serif; background-color: #1a1a2e; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { background-color: #2e2e50; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); max-width: 500px; width: 100%; text-align: center; }
+        h1 { color: #ffcc00; margin-bottom: 20px; font-size: 1.8em; }
+        .share-instructions { background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .share-instructions p { margin: 10px 0; font-size: 1.1em; }
+        .share-instructions strong { color: #ff6b6b; font-size: 1.5em; }
+        .whatsapp-btn { background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.3s; text-decoration: none; display: block; margin-top: 20px; }
+        .whatsapp-btn:hover { background-color: #128C7E; }
+        .status-message { margin-top: 30px; padding: 15px; border-radius: 5px; font-weight: bold; display: none; }
+        .success { background-color: #007a47; color: #99ff99; }
+        .pending { background-color: #ffcc00; color: #1a1a2e; }
+        
+        /* Progress Bar Styles */
+        #progressBarContainer { margin-top: 20px; width: 100%; background-color: #3e3e6b; border-radius: 5px; overflow: hidden; }
+        #progressBar { height: 25px; background-color: #e60073; width: 0%; text-align: center; line-height: 25px; color: white; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="mainTitle">🚀 තහවුරු කිරීමේ පියවර 🚀</h1>
+        
+        <div id="pendingView">
+            <div class="share-instructions">
+                <p>ඔබගේ Giveaway සහභාගීත්වය තහවුරු කිරීමට, කරුණාකර මෙම සබැඳිය</p>
+                <p>පහත බොත්තම භාවිතා කර **WhatsApp Groups 6 කට** Share කරන්න.</p>
+                <p>ඔබ Share කළ පසු **< Back** එබීමෙන් නැවත මෙහි පැමිණෙන්න.</p>
+            </div>
+
+            <a id="whatsappShareLink" class="whatsapp-btn" target="_blank">📲 WhatsApp ඔස්සේ Share කරන්න</a>
+            
+            <div id="progressBarContainer">
+                <div id="progressBar">0/6 සම්පූර්ණයි</div>
+            </div>
+
+            <div id="statusPending" class="status-message pending">
+                Share කර නැවත පැමිණෙන්න. 6 වතාවක් සම්පූර්ණ කළ විට ඔබ සාර්ථකව Giveaway එකට එක් වනු ඇත!
+            </div>
+        </div>
+
+        <div id="successView" class="status-message success" style="display: none;">
+             සුභ පැතුම්! ඔබගේ සියලු පියවරයන් සාර්ථකව සම්පූර්ණ කරන ලදී! ඔබ Giveaway එකට සාර්ථකව එක්ව ඇත.
+             <p style="margin-top: 10px; font-size: 0.9em;">(ඔබගේ විස්තර සුරක්ෂිතව ඇත. ජයග්‍රාහකයන් සතියකට වරක් තෝරා ගනු ලැබේ.)</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const SHARE_COUNT_KEY = 'ffGiveawayShareCount';
+            const REQUIRED_SHARES = 6;
+            
+            const pendingView = document.getElementById('pendingView');
+            const successView = document.getElementById('successView');
+            const progressBar = document.getElementById('progressBar');
+            const mainTitle = document.getElementById('mainTitle');
+
+            // 1. URL එකේ ඇති Free Fire ID ලබා ගැනීම 
+            const urlParams = new URLSearchParams(window.location.search);
+            const ffId = urlParams.get('ffId');
+            const membershipType = urlParams.get('membershipType');
+            
+            // 2. WhatsApp Share Link එක සැකසීම
+            // සටහන: ඔබේ සැබෑ වෙබ් අඩවියේ URL එක (https://ghjjncgj.vercel.app/) භාවිතා කරන්න.
+            const giveawayURL = window.location.origin + "/index.html"; 
+            const shareText = encodeURIComponent(
+                "🔥 Free Fire Membership Giveaway! 🔥\n" +
+                "මට " + membershipType + " එකක් දිනා ගන්න අවස්ථාවක් ලැබුණා! ඔබත් ඉක්මනින්ම සහභාගී වන්න.\n" +
+                "➡️ Link එක: " + giveawayURL
+            );
+            const whatsappLink = "https://wa.me/?text=" + shareText;
+            document.getElementById('whatsappShareLink').href = whatsappLink;
+
+            // 3. Share Count එක Local Storage වෙතින් ලබා ගැනීම
+            let shareCount = parseInt(localStorage.getItem(SHARE_COUNT_KEY)) || 0;
+            
+            // 4. පිටුව පූරණය වන විට, පරිශීලකයා නැවත පැමිණෙන සෑම අවස්ථාවකම Count එක වැඩි කිරීම
+            if (document.referrer.includes('wa.me') || document.referrer.includes('whatsapp') || shareCount < REQUIRED_SHARES) {
+                // සරලම ක්‍රමය: මෙම පිටුවට පැමිණෙන සෑම විටම (තහවුරු කිරීමට පෙර) ගණන වැඩි කරන්න
+                if (shareCount < REQUIRED_SHARES) {
+                     shareCount++;
+                     localStorage.setItem(SHARE_COUNT_KEY, shareCount);
+                }
+            }
+
+            // 5. තත්ත්වය යාවත්කාලීන කිරීම
+            function updateStatus() {
+                const percentage = (shareCount / REQUIRED_SHARES) * 100;
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = shareCount + '/' + REQUIRED_SHARES + ' සම්පූර්ණයි';
+
+                if (shareCount >= REQUIRED_SHARES) {
+                    // සාර්ථකත්වය
+                    pendingView.style.display = 'none';
+                    successView.style.display = 'block';
+                    mainTitle.textContent = '🥳 සහභාගීත්වය තහවුරුයි!';
+                    
+                } else {
+                    // තවම සම්පූර්ණ නැත
+                    pendingView.style.display = 'block';
+                    successView.style.display = 'none';
+                }
+            }
+            
+            updateStatus();
+        });
+    </script>
+</body>
+              </html>
