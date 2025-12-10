@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Membership Unlock</title>
-    <meta http-equiv="refresh" content="240">
-    
+    <title>Free Fire Christmas Membership Giveaway</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    
+    </head>
 <body>
 
     <header>
         <div class="container">
-            <h1><i class="fas fa-satellite-dish"></i> Free Fire Membership Unlock</h1>
-            <div class="christmas-banner">⚡ Exclusive Giveaway Event!</div>
+            <h1><i class="fas fa-gift"></i> Free Fire Christmas Membership Giveaway</h1>
+            <div class="christmas-banner">🎄 Season of Giving!</div>
         </div>
     </header>
 
@@ -27,15 +26,13 @@
                 <div class="form-group">
                     <label for="player-id">Free Fire Player ID (Numeric)</label>
                     <input type="text" id="player-id" name="playerId" required pattern="\d{6,12}" 
-                           aria-required="true" title="6-12 digits required"
-                           placeholder="Ex: 1234567890 (Your 10-digit ID)">
+                           aria-required="true" title="6-12 digits required">
                     <div class="error-message" id="error-player-id"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="player-name">Player Name</label>
-                    <input type="text" id="player-name" name="playerName" required aria-required="true"
-                           placeholder="Ex: HunterKiller">
+                    <input type="text" id="player-name" name="playerName" required aria-required="true">
                     <div class="error-message" id="error-player-name"></div>
                 </div>
 
@@ -43,14 +40,13 @@
                     <label for="region">Free Fire Region</label>
                     <select id="region" name="region" required aria-required="true">
                         <option value="">-- Select Region --</option>
-                        <option value="Singapore">🇸🇬 Singapore Server</option>
-                        <option value="Asia">🌏 Asia</option>
-                        <option value="Europe">🇪🇺 Europe</option>
-                        <option value="North America">🇺🇸 North America</option>
-                        <option value="South America">🇧🇷 South America</option>
-                        <option value="Africa">🌍 Africa</option>
-                        <option value="Oceania">🇦🇺 Oceania</option>
-                        <option value="Other">❓ Other</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Other">Other</option>
                     </select>
                     <div class="error-message" id="error-region"></div>
                 </div>
@@ -74,13 +70,16 @@
                     <div class="error-message" id="error-membership"></div>
                 </div>
 
-                <div class="form-group contact-group">
-                    <label>Custom Top-ups & Support</label>
-                    <p class="contact-info">Need to top-up a specific amount or need help? <br>
-                       Contact us via WhatsApp for custom top-up options.</p>
-                    <a href="https://wa.me/9471xxxxxxx" target="_blank" class="contact-button">
-                        <i class="fab fa-whatsapp"></i> Contact for Top-ups
-                    </a>
+                <div class="form-group topup-group">
+                    <label for="wallet-amount">Optional Wallet Top-up Amount</label>
+                    <div class="currency-input-group">
+                        <input type="number" id="wallet-amount" name="walletAmount" min="0" value="0">
+                        <select id="currency" name="currency">
+                            <option value="LKR">LKR (Rs.)</option>
+                            <option value="USD">USD ($)</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="error-wallet-amount"></div>
                 </div>
                 
                 <div class="form-group checkbox-group">
@@ -102,6 +101,7 @@
                 <p><strong>Player Name:</strong> <span id="summary-name"></span></p>
                 <p><strong>Region:</strong> <span id="summary-region"></span></p>
                 <p><strong>Membership:</strong> <span id="summary-membership"></span></p>
+                <p><strong>Wallet Amount:</strong> <span id="summary-wallet"></span></p>
             </div>
             
             <p class="share-instructions">
@@ -121,7 +121,7 @@
                 <h3>Confirm Your Share:</h3>
                 <div class="form-group">
                     <label for="group-name">Group Name / Number Shared To:</label>
-                    <input type="text" id="group-name" placeholder="Ex: FF Squad 01 or 071XXXXXXX" aria-label="Group name or number">
+                    <input type="text" id="group-name" placeholder="E.g., FF Squad 01, 071XXXXXXX" aria-label="Group name or number">
                 </div>
                 <button id="manual-share-btn" class="cta-button secondary-button">
                     <i class="fas fa-check"></i> I Shared Successfully
@@ -159,7 +159,7 @@
 
         <div id="success-modal" class="modal hidden">
             <div class="modal-content">
-                <h2><i class="fas fa-trophy"></i> Key Unlocked!</h2>
+                <h2><i class="fas fa-trophy"></i> Congratulations!</h2>
                 <p>You have successfully completed the share requirements.</p>
                 <div class="key-display-area">
                     <p>Your Membership Key:</p>
@@ -197,4 +197,4 @@
 
     <script src="script.js"></script>
 </body>
-                                                   </html>
+                            </html>
