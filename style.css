@@ -1,14 +1,14 @@
-/* Basic Reset and Variables (Updated to Dark/Futuristic Theme) */
+/* Basic Reset and Variables (Dark/Futuristic Theme, Adjusted for Clean/iOS Look) */
 :root {
     --primary-color: #007bff; /* Bright Blue (Accent/Text) */
     --secondary-color: #ffc107; /* Yellow/Gold (Button/Highlight) */
     --accent-color: #ff007f; /* Magenta/Purple for subtle glow */
     --background-color-dark: #120a24; /* Dark Purple Background */
-    --card-background: rgba(43, 27, 85, 0.8); /* Semi-transparent Card BG */
+    --card-background: rgba(43, 27, 85, 0.85); /* Semi-transparent Card BG */
     --text-color: #f0f0f0; /* Light Text */
     --button-text-color: #120a24; /* Dark button text */
-    --border-radius: 12px;
-    --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    --ios-border-radius: 18px; /* Larger, smoother radius for iOS look */
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -18,10 +18,9 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* iOS-like font stack */
     line-height: 1.6;
     color: var(--text-color);
-    /* Dark Gradient Background matching the image */
     background: linear-gradient(135deg, #120a24, #0d061c, #2a0b4d);
     background-attachment: fixed;
     min-height: 100vh;
@@ -29,17 +28,16 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 600px; /* Max width reduced for a mobile-centric card look (like a phone screen) */
     margin: 0 auto;
     padding: 0 10px;
 }
 
 /* Header Styling */
 header {
-    background: rgba(18, 10, 36, 0.5); /* Transparent Dark Header */
-    color: var(--text-color);
+    background: rgba(18, 10, 36, 0.5); 
     padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -47,298 +45,124 @@ header {
 
 header h1 {
     font-size: 1.5em;
-    text-align: center;
-    margin-bottom: 5px;
-    color: var(--primary-color); /* Bright Blue Title */
-    text-shadow: 0 0 10px rgba(0, 123, 255, 0.7); /* Subtle glow */
-}
-
-.christmas-banner {
-    text-align: center;
-    font-weight: bold;
-    color: var(--secondary-color); /* Gold Accent */
-    animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); opacity: 0.9; }
-    to { transform: scale(1.05); opacity: 1; }
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
 /* Main Content and Section Styling */
 main {
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 .page-section {
     background: var(--card-background);
-    /* Adding the smooth corners and strong shadow from the image */
-    backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px 20px;
+    backdrop-filter: blur(15px); /* Increased blur for glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 25px;
     margin-bottom: 30px;
-    border-radius: var(--border-radius);
+    border-radius: var(--ios-border-radius); /* Applied iOS radius */
     box-shadow: var(--box-shadow);
 }
 
 .page-section h2 {
     color: var(--primary-color);
-    margin-bottom: 20px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
-    font-size: 1.6em;
-    text-align: center;
-    text-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.hidden {
-    display: none !important;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Lighter divider */
+    padding-bottom: 15px;
+    font-size: 1.4em;
+    font-weight: 600; /* Medium weight for iOS look */
 }
 
 /* Form Styling */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: normal;
-    color: var(--text-color);
-    font-size: 0.9em;
-}
-
 input[type="text"], 
 input[type="number"], 
 select {
     width: 100%;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05); /* Dark input background */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    padding: 14px; /* Slightly larger padding */
+    background: rgba(255, 255, 255, 0.08); /* Lighter input background */
+    border: none; /* Removed border */
+    border-radius: 10px; /* Smooth corners for inputs */
     font-size: 1em;
     color: var(--text-color);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle inner shadow */
+}
+select {
+    /* Ensure select background is consistent */
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-input[type="text"]:focus, 
-input[type="number"]:focus, 
-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    outline: none;
-    background: rgba(255, 255, 255, 0.1);
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Faint placeholder text */
 }
 
 /* Membership Options (Radio Buttons) */
 .membership-options label {
-    display: block;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: normal;
-}
-
-.membership-options input[type="radio"] {
-    margin-right: 10px;
-}
-
-.membership-options label:has(input[type="radio"]:checked) {
-    background-color: rgba(0, 123, 255, 0.3);
-    color: var(--text-color);
-    border-color: var(--primary-color);
-}
-
-/* Currency Input Group */
-.currency-input-group {
-    display: flex;
-}
-
-.currency-input-group select {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-}
-
-/* Error Messages */
-.error-message {
-    color: #ff6b6b; /* Soft red for errors */
-    font-size: 0.85em;
-    margin-top: 5px;
-    font-weight: bold;
-}
-
-/* CTA Buttons (Match Screenshot's Yellow/Gold Button) */
-.cta-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    font-size: 1.1em;
-    font-weight: bold;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-    color: var(--button-text-color);
-}
-
-.cta-button:active {
-    transform: scale(0.99);
-}
-
-.cta-button {
-    background-color: var(--secondary-color); /* Yellow/Gold Primary Button */
-    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
-}
-
-.cta-button:hover {
-    background-color: #e0a800;
-    box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
-}
-
-.cta-button.whatsapp-button {
-    background-color: #25d366; /* WhatsApp Green */
-    color: white;
-}
-
-.cta-button.whatsapp-button:hover {
-    background-color: #1eaf53;
-}
-
-.secondary-button {
-    background-color: var(--primary-color); /* Blue Secondary Button */
-    color: var(--text-color);
-}
-
-.secondary-button:hover {
-    background-color: #0056b3;
-}
-
-
-/* Page 2: Share Section */
-.summary-box {
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(0, 123, 255, 0.5);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
+    border-radius: 10px;
 }
-
-.summary-box h3 {
-    color: var(--primary-color);
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
-/* Progress Bar Styling */
-.progress-box {
-    margin-top: 30px;
-    padding: 15px;
-    border: 2px solid var(--accent-color); /* Purple/Magenta outline */
-    border-radius: var(--border-radius);
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.progress-box h3 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.progress-bar-container {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    height: 10px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: var(--primary-color);
-    width: 0%;
-    transition: width 0.5s ease-in-out;
-    border-radius: 50px;
-    box-shadow: 0 0 5px var(--primary-color);
-    position: relative;
-}
-
-/* Modal Styling (Success/Key Page) */
-.modal-content {
-    background: var(--card-background);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    border-top: 5px solid var(--secondary-color);
-}
-
-.modal-content h2 {
-    color: var(--secondary-color);
-    text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
-}
-
-.key-display-area {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 4px;
-    margin: 20px 0;
+.membership-options label:has(input[type="radio"]:checked) {
+    background-color: rgba(0, 123, 255, 0.4);
     border: 1px solid var(--primary-color);
 }
 
-#membership-key-output {
-    display: block;
-    font-size: 1.2em;
+
+/* 2. Contact Group Styling */
+.contact-group {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    color: #bbb;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #25d366; 
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
     font-weight: bold;
-    color: var(--secondary-color); /* Gold color for the key */
-    text-shadow: 0 0 3px rgba(255, 193, 7, 0.8);
+    transition: background-color 0.3s;
+}
+
+/* CTA Buttons (Primary: Yellow/Gold) */
+.cta-button {
+    font-size: 1.1em;
+    padding: 18px; /* Taller button */
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.secondary-button {
+    background-color: #4a4a4a; /* Darker secondary for contrast */
+    color: white;
+}
+
+/* Page 2: Share Section */
+.summary-box {
+    background: rgba(255, 255, 255, 0.1); /* Lighter glass background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
 }
 
 /* Footer Styling */
 footer {
-    background-color: #0d061c;
-    color: #6a6a6a;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 0.9em;
-    margin-top: 30px;
+    padding: 15px 0 30px; /* Extra padding at bottom */
 }
 
-footer a {
-    color: var(--primary-color);
-}
 
 /* --- Desktop/Tablet Media Query --- */
 @media (min-width: 768px) {
-    /* (Desktop styles remain largely the same, but inherits new colors) */
-    .cta-button {
-        width: auto;
-        padding: 12px 30px;
-        display: inline-block;
-    }
-    
+    /* Ensure desktop buttons align properly */
     .manual-share-confirm .secondary-button {
-        margin-top: 30px; 
+        margin-top: 35px; /* Adjust alignment due to increased input/button height */
     }
-    }ght: 10px;
     }
-
-    .manual-share-confirm .secondary-button {
-        width: auto;
-        display: inline-block;
-        vertical-align: top;
-        margin-top: 30px; /* Align with input */
-    }
-
-    .currency-input-group {
-        max-width: 300px; /* Limit optional input size on desktop */
-    }
-
-    .modal-actions .cta-button {
-        display: inline-block;
-        width: auto;
-        margin: 5px 8px;
-    }
-}
