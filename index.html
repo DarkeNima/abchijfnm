@@ -3,254 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 Free Fire Membership Giveaway 🔥</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            padding: 25px;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: white;
-            padding: 25px;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 18px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 18px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 1em;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #007aff;
-            border: none;
-            color: white;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .lang-box {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .lang-btn {
-            padding: 6px 12px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            background: #ffffff99;
-            backdrop-filter: blur(5px);
-        }
-
-        .active {
-            background: white !important;
-            font-weight: bold;
-            color: #007aff;
-        }
-
-    </style>
-</head>
-
+    <title>Free Fire Christmas Membership Giveaway</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    </head>
 <body>
 
-<div class="container">
-
-    <div class="lang-box">
-        <button id="si-btn" class="lang-btn active">සිංහල</button>
-        <button id="en-btn" class="lang-btn">English</button>
-    </div>
-
-    <h2 id="title">💎 Free Fire VIP Membership Giveaway 💎</h2>
-    <p id="subtitle">Giveaway එකට එක්වීමට පහත විස්තර පුරවන්න</p>
-
-    <form action="verification.html" method="GET">
-
-        <div class="form-group">
-            <label id="ff-label">Free Fire ID:</label>
-            <input type="text" name="ffId" id="ff-placeholder" placeholder="ඔබගේ Free Fire ID" required>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-gift"></i> Free Fire Christmas Membership Giveaway</h1>
+            <div class="christmas-banner">🎄 Season of Giving!</div>
         </div>
+    </header>
 
-        <div class="form-group">
-            <label id="email-label">Email:</label>
-            <input type="email" name="email" id="email-placeholder" placeholder="Email එක ඇතුලත් කරන්න" required>
-        </div>
+    <main class="container">
+        
+        <section id="page-form" class="page-section active">
+            <h2>Enter Player Details & Select Membership</h2>
+            <form id="giveaway-form">
+                
+                <div class="form-group">
+                    <label for="player-id">Free Fire Player ID (Numeric)</label>
+                    <input type="text" id="player-id" name="playerId" required pattern="\d{6,12}" 
+                           aria-required="true" title="6-12 digits required">
+                    <div class="error-message" id="error-player-id"></div>
+                </div>
 
-        <div class="form-group">
-            <label id="wa-label">WhatsApp Number:</label>
-            <input type="tel" name="whatsapp" placeholder="94771234567" required>
-        </div>
+                <div class="form-group">
+                    <label for="player-name">Player Name</label>
+                    <input type="text" id="player-name" name="playerName" required aria-required="true">
+                    <div class="error-message" id="error-player-name"></div>
+                </div>
 
-        <div class="form-group">
-            <label id="member-label">Membership Select:</label>
-            <select name="membershipType" id="member-options">
-                <option value="Monthly Membership" id="opt1">Monthly Membership</option>
-                <option value="Weekly Lite" id="opt2">Weekly Lite</option>
-                <option value="Super VIP Weekly" id="opt3">Super VIP Weekly</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="region">Free Fire Region</label>
+                    <select id="region" name="region" required aria-required="true">
+                        <option value="">-- Select Region --</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-message" id="error-region"></div>
+                </div>
 
-        <button type="submit" id="submit-btn">Next ➜</button>
+                <div class="form-group">
+                    <label>Select Membership</label>
+                    <div class="membership-options">
+                        <label>
+                            <input type="radio" name="membership" value="Weekly" required aria-required="true">
+                            Weekly Membership
+                        </label>
+                        <label>
+                            <input type="radio" name="membership" value="Weekly Lite">
+                            Weekly Lite Membership
+                        </label>
+                        <label>
+                            <input type="radio" name="membership" value="Monthly">
+                            Monthly Membership
+                        </label>
+                    </div>
+                    <div class="error-message" id="error-membership"></div>
+                </div>
 
-        <p style="font-size: 13px; margin-top: 10px;" id="terms">
-            නියමයන් සහ කොන්දේසි අදාළ වේ.
-        </p>
+                <div class="form-group topup-group">
+                    <label for="wallet-amount">Optional Wallet Top-up Amount</label>
+                    <div class="currency-input-group">
+                        <input type="number" id="wallet-amount" name="walletAmount" min="0" value="0">
+                        <select id="currency" name="currency">
+                            <option value="LKR">LKR (Rs.)</option>
+                            <option value="USD">USD ($)</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="error-wallet-amount"></div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agree-terms" name="agreeTerms" required aria-required="true">
+                    <label for="agree-terms">I agree to the <a href="#terms" target="_blank">Terms & Conditions</a></label>
+                    <div class="error-message" id="error-agree-terms"></div>
+                </div>
 
-    </form>
+                <button type="submit" id="submit-form-btn" class="cta-button">Proceed to Share <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </section>
 
-</div>
-
-<script>
-
-const texts = {
-    si: {
-        title: "💎 Free Fire VIP Membership Giveaway 💎",
-        subtitle: "Giveaway එකට එක්වීමට පහත විස්තර පුරවන්න",
-        ff: "Free Fire ID:",
-        ffph: "ඔබගේ Free Fire ID",
-        email: "Email:",
-        emailph: "Email එක ඇතුලත් කරන්න",
-        wa: "WhatsApp අංකය:",
-        mem: "Membership තෝරන්න:",
-        m1: "Monthly Membership",
-        m2: "Weekly Lite",
-        m3: "Super VIP Weekly",
-        submit: "ඊළඟට ➜",
-        terms: "නියමයන් සහ කොන්දේසි අදාළ වේ."
-    },
-
-    en: {
-        title: "💎 Free Fire VIP Membership Giveaway 💎",
-        subtitle: "Fill in the details to join the giveaway",
-        ff: "Free Fire ID:",
-        ffph: "Enter your Free Fire ID",
-        email: "Email:",
-        emailph: "Enter Email",
-        wa: "WhatsApp Number:",
-        mem: "Select Membership:",
-        m1: "Monthly Membership",
-        m2: "Weekly Lite",
-        m3: "Super VIP Weekly",
-        submit: "Next ➜",
-        terms: "Terms & Conditions Apply."
-    }
-};
-
-function switchLang(lang) {
-    document.getElementById("title").textContent = texts[lang].title;
-    document.getElementById("subtitle").textContent = texts[lang].subtitle;
-    document.getElementById("ff-label").textContent = texts[lang].ff;
-    document.getElementById("ff-placeholder").placeholder = texts[lang].ffph;
-    document.getElementById("email-label").textContent = texts[lang].email;
-    document.getElementById("email-placeholder").placeholder = texts[lang].emailph;
-    document.getElementById("wa-label").textContent = texts[lang].wa;
-    document.getElementById("member-label").textContent = texts[lang].mem;
-
-    document.getElementById("opt1").textContent = texts[lang].m1;
-    document.getElementById("opt2").textContent = texts[lang].m2;
-    document.getElementById("opt3").textContent = texts[lang].m3;
-
-    document.getElementById("submit-btn").textContent = texts[lang].submit;
-    document.getElementById("terms").textContent = texts[lang].terms;
-
-    document.getElementById("si-btn").classList.remove("active");
-    document.getElementById("en-btn").classList.remove("active");
-    document.getElementById(lang + "-btn").classList.add("active");
-}
-
-document.getElementById("si-btn").onclick = () => switchLang("si");
-document.getElementById("en-btn").onclick = () => switchLang("en");
-
-</script>
-
-</body>
-                </html>      if (element.tagName === 'TITLE') {
-                        document.title = translations[lang][key];
-                    } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
+        <section id="page-share" class="page-section hidden">
+            <h2><i class="fab fa-whatsapp"></i> Share to Unlock Your Key!</h2>
             
-            // භාෂා බොත්තම් සක්‍රීය/අක්‍රීය කිරීම
-            document.getElementById('lang-si').classList.remove('active');
-            document.getElementById('lang-en').classList.remove('active');
-            document.getElementById('lang-' + lang).classList.add('active');
-            document.documentElement.lang = lang;
-            localStorage.setItem('selectedLang', lang); // තේරීම මතක තබා ගැනීම
-        }
+            <div class="summary-box">
+                <h3>Your Submission Summary:</h3>
+                <p><strong>Player ID:</strong> <span id="summary-id"></span></p>
+                <p><strong>Player Name:</strong> <span id="summary-name"></span></p>
+                <p><strong>Region:</strong> <span id="summary-region"></span></p>
+                <p><strong>Membership:</strong> <span id="summary-membership"></span></p>
+                <p><strong>Wallet Amount:</strong> <span id="summary-wallet"></span></p>
+            </div>
+            
+            <p class="share-instructions">
+                To win your membership, you must share the giveaway message to 
+                <strong>at least 8 different WhatsApp groups</strong> and reach a total of 
+                <strong>18 shares</strong> (aggregate).
+            </p>
 
-        // --- Snow Animation කාර්යය ---
-        function createSnowflake() {
-            const snowContainer = document.getElementById('snowContainer');
-            if (!snowContainer) return;
+            <button id="whatsapp-share-btn" class="cta-button whatsapp-button">
+                <i class="fab fa-whatsapp"></i> Share to WhatsApp
+            </button>
+            <p class="desktop-fallback-note">
+                (On desktop, copy the message and share manually; then click "I Shared" below)
+            </p>
+            
+            <div class="manual-share-confirm">
+                <h3>Confirm Your Share:</h3>
+                <div class="form-group">
+                    <label for="group-name">Group Name / Number Shared To:</label>
+                    <input type="text" id="group-name" placeholder="E.g., FF Squad 01, 071XXXXXXX" aria-label="Group name or number">
+                </div>
+                <button id="manual-share-btn" class="cta-button secondary-button">
+                    <i class="fas fa-check"></i> I Shared Successfully
+                </button>
+                <div class="error-message" id="error-share-group"></div>
+            </div>
 
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
+            <div class="progress-box">
+                <h3><i class="fas fa-chart-line"></i> Your Progress:</h3>
+                
+                <div class="progress-item">
+                    <p>Groups shared to: <span id="progress-groups">0</span> / 8</p>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar-groups" class="progress-bar"></div>
+                    </div>
+                    <span id="groups-checklist" class="checklist-status"></span>
+                </div>
+                
+                <div class="progress-item">
+                    <p>Total shares: <span id="progress-total">0</span> / 18</p>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar-total" class="progress-bar"></div>
+                    </div>
+                    <span id="total-shares-checklist" class="checklist-status"></span>
+                </div>
+            </div>
 
-            // ප්‍රමාණය සහ ආරම්භක ස්ථානය අහඹු ලෙස තේරීම
-            const size = Math.random() * 5 + 2;
-            const startX = Math.random() * window.innerWidth;
-            const duration = Math.random() * 10 + 5;
-            const opacity = Math.random() * 0.7 + 0.3;
+            <div id="debug-panel" class="debug-panel hidden">
+                <h4><i class="fas fa-bug"></i> Debug Mode (QA Only)</h4>
+                <button id="debug-share-btn" class="small-button">+1 Share (Total)</button>
+                <button id="debug-group-btn" class="small-button">+1 Unique Group</button>
+                <p>Warning: Progress is lost if browser storage is cleared.</p>
+            </div>
+        </section>
 
-            snowflake.style.width = size + 'px';
-            snowflake.style.height = size + 'px';
-            snowflake.style.left = startX + 'px';
-            snowflake.style.opacity = opacity;
-            snowflake.style.animationDuration = duration + 's';
-            snowflake.style.animationDelay = -Math.random() * duration + 's'; 
+        <div id="success-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2><i class="fas fa-trophy"></i> Congratulations!</h2>
+                <p>You have successfully completed the share requirements.</p>
+                <div class="key-display-area">
+                    <p>Your Membership Key:</p>
+                    <code id="membership-key-output">FF-XXXX-XXXX-XXXX</code>
+                </div>
+                
+                <div class="modal-actions">
+                    <button id="copy-key-btn" class="cta-button primary-button"><i class="fas fa-copy"></i> Copy Key</button>
+                    <button id="whatsapp-key-btn" class="cta-button secondary-button"><i class="fab fa-whatsapp"></i> Send Key to Me (WhatsApp)</button>
+                    <button id="download-key-btn" class="cta-button secondary-button"><i class="fas fa-download"></i> Download Key (TXT)</button>
+                </div>
 
-            snowContainer.appendChild(snowflake);
+                <p class="activation-note">
+                    <i class="fas fa-info-circle"></i> Your membership will be activated in the next **24 hours**. Please keep your key safe.
+                </p>
+                <button id="close-modal-btn" class="small-button">Close</button>
+            </div>
+        </div>
 
-            // තත්පර 20කට පසු ඉවත් කිරීම
-            setTimeout(() => {
-                snowflake.remove();
-            }, 20000);
-        }
+        <section id="admin-panel" class="page-section hidden">
+            <h2><i class="fas fa-users-cog"></i> Admin Submissions Log</h2>
+            <p>Admin Mode is active. Data is read from localStorage only.</p>
+            <ul id="submission-list">
+                <li>No submissions found.</li>
+            </ul>
+            <button id="clear-localstorage-btn" class="small-button danger-button">Clear All Local Storage Data</button>
+        </section>
+    </main>
 
-        // --- Event Listeners සහ Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-             // භාෂාව මුලින්ම පූරණය කිරීම
-             const savedLang = localStorage.getItem('selectedLang') || 'si';
-             updateText(savedLang);
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Free Fire Giveaway. | <a href="#contact">Contact Us</a> | <a href="#terms">T&C</a></p>
+        </div>
+    </footer>
 
-             // භාෂා මාරු කිරීමේ බොත්තම්
-             document.getElementById('lang-si').addEventListener('click', () => updateText('si'));
-             document.getElementById('lang-en').addEventListener('click', () => updateText('en'));
-
-             // Snowflakes නිර්මාණය කිරීම (සෑම මිලි තත්පර 300කට වරක්)
-             setInterval(createSnowflake, 300);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-</html>
+                </html>
