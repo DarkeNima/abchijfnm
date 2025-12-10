@@ -17,7 +17,6 @@ const MIN_SHARE_TIME_MS = 5000; // 5 seconds to prevent accidental double-counts
 const STORAGE_KEY_FORM_DATA = 'ffGiveawayFormData';
 const STORAGE_KEY_SHARE_DATA = 'ffGiveawayShareData';
 const STORAGE_KEY_SUBMISSIONS = 'ffGiveawaySubmissions';
-const STORAGE_KEY_UNIQUE_GROUPS = 'ffGiveawayUniqueGroups';
 
 // --- Data Structure for Submission ---
 let currentSubmission = {
@@ -26,8 +25,7 @@ let currentSubmission = {
     playerName: null,
     region: null,
     membership: null,
-    walletAmount: 0,
-    currency: 'LKR',
+    // Wallet fields removed
     shareData: {
         totalShares: 0,
         uniqueGroups: new Set(),
@@ -43,22 +41,19 @@ let currentSubmission = {
 
 /**
  * Reads the submission data from localStorage.
- * Initializes with default structure if none is found.
  */
 function loadData() {
     const formDataJson = localStorage.getItem(STORAGE_KEY_FORM_DATA);
     const shareDataJson = localStorage.getItem(STORAGE_KEY_SHARE_DATA);
     
     if (formDataJson) {
-        // Load basic form data
+        // Load basic form data (omitting wallet fields)
         const loadedFormData = JSON.parse(formDataJson);
         currentSubmission.id = loadedFormData.id;
         currentSubmission.playerId = loadedFormData.playerId;
         currentSubmission.playerName = loadedFormData.playerName;
         currentSubmission.region = loadedFormData.region;
         currentSubmission.membership = loadedFormData.membership;
-        currentSubmission.walletAmount = loadedFormData.walletAmount;
-        currentSubmission.currency = loadedFormData.currency;
         currentSubmission.winKey = loadedFormData.winKey;
         currentSubmission.timestamp = loadedFormData.timestamp;
     }
@@ -67,7 +62,6 @@ function loadData() {
         // Load share data and convert uniqueGroups array back to a Set
         const loadedShareData = JSON.parse(shareDataJson);
         currentSubmission.shareData.totalShares = loadedShareData.totalShares || 0;
-        // Ensure Set is re-created from the stored Array
         currentSubmission.shareData.uniqueGroups = new Set(loadedShareData.uniqueGroups || []);
         currentSubmission.shareData.lastShareTimestamp = loadedShareData.lastShareTimestamp || 0;
     }
@@ -75,18 +69,15 @@ function loadData() {
 
 /**
  * Saves the form and share data to localStorage.
- * Separated to allow independent updates.
  */
 function saveData() {
-    // Save form data (excluding the shareData object)
+    // Save form data (excluding the shareData object and wallet fields)
     const formDataToSave = {
         id: currentSubmission.id,
         playerId: currentSubmission.playerId,
         playerName: currentSubmission.playerName,
         region: currentSubmission.region,
         membership: currentSubmission.membership,
-        walletAmount: currentSubmission.walletAmount,
-        currency: currentSubmission.currency,
         winKey: currentSubmission.winKey,
         timestamp: currentSubmission.timestamp
     };
@@ -95,13 +86,11 @@ function saveData() {
     // Save share data (converting Set to Array for JSON serialization)
     const shareDataToSave = {
         totalShares: currentSubmission.shareData.totalShares,
-        // Convert Set to Array before saving to JSON
         uniqueGroups: Array.from(currentSubmission.shareData.uniqueGroups),
         lastShareTimestamp: currentSubmission.shareData.lastShareTimestamp,
     };
     localStorage.setItem(STORAGE_KEY_SHARE_DATA, JSON.stringify(shareDataToSave));
 
-    // If a win key is generated, update the permanent submissions list
     if (currentSubmission.winKey) {
         updateSubmissionLog();
     }
@@ -109,27 +98,10 @@ function saveData() {
 
 /**
  * Prepares the payload for a server POST request.
- * This function should be replaced by a real implementation.
- * @param {object} payload - The complete current submission data.
  */
 function submitToServer(payload) {
-    // 🚧 STUB: Developer must replace this with a real backend API call (e.g., fetch)
+    // 🚧 STUB: Developer must replace this with a real backend API call (wallet fields removed from payload)
     console.log('STUB: Data prepared for server submission:', payload);
-    // Example commented-out fetch call:
-    /*
-    fetch('YOUR_API_ENDPOINT', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    }).then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-    }).then(data => {
-        console.log('Server response:', data);
-    }).catch(error => {
-        console.error('Submission failed:', error);
-    });
-    */
 }
 
 /**
@@ -138,7 +110,6 @@ function submitToServer(payload) {
 function updateSubmissionLog() {
     let submissions = JSON.parse(localStorage.getItem(STORAGE_KEY_SUBMISSIONS) || '[]');
     
-    // Check if the current submission already exists by ID
     const existingIndex = submissions.findIndex(s => s.id === currentSubmission.id);
     const logEntry = {
         id: currentSubmission.id,
@@ -151,16 +122,13 @@ function updateSubmissionLog() {
     };
 
     if (existingIndex > -1) {
-        // Update existing entry (e.g., when key is generated)
         submissions[existingIndex] = logEntry;
     } else {
-        // Add new entry
         submissions.push(logEntry);
     }
     
     localStorage.setItem(STORAGE_KEY_SUBMISSIONS, JSON.stringify(submissions));
     
-    // Also send to the server stub
     submitToServer(currentSubmission);
 }
 
@@ -171,13 +139,9 @@ function updateSubmissionLog() {
 
 /**
  * Performs client-side validation for the entire form.
- * @param {HTMLFormElement} form - The form element.
- * @returns {boolean} - True if validation passes, false otherwise.
  */
 function validateForm(form) {
     let isValid = true;
-
-    // Reset all error messages
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
 
     const playerId = form.elements['playerId'].value.trim();
@@ -185,7 +149,6 @@ function validateForm(form) {
     const region = form.elements['region'].value;
     const membership = form.elements['membership'].value;
     const agreeTerms = form.elements['agreeTerms'].checked;
-    const walletAmount = parseFloat(form.elements['walletAmount'].value) || 0;
 
     // 1. Player ID validation (6-12 digits)
     if (!/^\d{6,12}$/.test(playerId)) {
@@ -211,13 +174,7 @@ function validateForm(form) {
         isValid = false;
     }
     
-    // 5. Wallet Amount validation (non-negative)
-    if (walletAmount < 0) {
-        document.getElementById('error-wallet-amount').textContent = 'Wallet amount cannot be negative.';
-        isValid = false;
-    }
-
-    // 6. Terms agreement validation
+    // 5. Terms agreement validation
     if (!agreeTerms) {
         document.getElementById('error-agree-terms').textContent = 'You must agree to the Terms & Conditions.';
         isValid = false;
@@ -233,23 +190,18 @@ function handleFormSubmit(event) {
     event.preventDefault();
 
     if (validateForm(form)) {
-        // Gather and store form data
-        currentSubmission.id = currentSubmission.id || Date.now().toString(36) + Math.random().toString(36).substr(2); // Unique ID for tracking
+        currentSubmission.id = currentSubmission.id || Date.now().toString(36) + Math.random().toString(36).substr(2); 
         currentSubmission.playerId = form.elements['playerId'].value.trim();
         currentSubmission.playerName = form.elements['playerName'].value.trim();
         currentSubmission.region = form.elements['region'].value;
         currentSubmission.membership = form.elements['membership'].value;
-        currentSubmission.walletAmount = parseFloat(form.elements['walletAmount'].value) || 0;
-        currentSubmission.currency = form.elements['currency'].value;
+        // Wallet fields removed from submission data
         
-        saveData(); // Save form data
+        saveData(); 
 
-        // Display confirmation and switch page
         displaySummary();
         updateProgressUI();
         switchPage('page-share');
-
-        // Note: Initial server submission happens when share requirements are met (in updateSubmissionLog)
     } else {
         alert('Please correct the errors in the form.');
     }
@@ -257,7 +209,6 @@ function handleFormSubmit(event) {
 
 /**
  * Switches the active section based on the ID.
- * @param {string} pageId - The ID of the section to show.
  */
 function switchPage(pageId) {
     document.querySelectorAll('.page-section').forEach(section => {
@@ -268,7 +219,369 @@ function switchPage(pageId) {
     if (target) {
         target.classList.remove('hidden');
         target.classList.add('active');
-        window.scrollTo(0, 0); // Scroll to top on page switch
+        window.scrollTo(0, 0); 
+    }
+}
+
+
+// ===================================
+// 3. Share Tracking (Page 2)
+// ===================================
+
+/**
+ * Updates the summary box on Page 2 with the submitted data.
+ */
+function displaySummary() {
+    document.getElementById('summary-id').textContent = currentSubmission.playerId;
+    document.getElementById('summary-name').textContent = currentSubmission.playerName;
+    document.getElementById('summary-region').textContent = currentSubmission.region;
+    document.getElementById('summary-membership').textContent = currentSubmission.membership;
+    
+    // Wallet Amount Summary Removed
+    const walletSummary = document.getElementById('summary-wallet');
+    if (walletSummary) walletSummary.parentElement.remove(); // Remove the entire Wallet line if it exists (for clean code)
+}
+
+/**
+ * Creates the prefilled WhatsApp share message.
+ */
+function createShareMessage() {
+    const id = currentSubmission.playerId;
+    const name = currentSubmission.playerName;
+    const region = currentSubmission.region;
+    const dummyLink = encodeURIComponent(window.location.origin); 
+
+    const message = `⚡ Free Fire Membership Giveaway! 🎁 Claim a FREE ${currentSubmission.membership} and win big!
+
+PlayerID: ${id}
+Name: ${name}
+Region: ${region}
+
+Join and claim your membership here: ${dummyLink}`;
+
+    return encodeURIComponent(message);
+}
+
+/**
+ * Handles the click on the main WhatsApp share button.
+ */
+function handleWhatsappShareClick() {
+    const message = createShareMessage();
+    const whatsappUrl = `https://wa.me/?text=${message}`; 
+    window.open(whatsappUrl, '_blank');
+}
+
+/**
+ * Increments the share counters (both total and unique groups)
+ */
+function incrementShare(groupName) {
+    const now = Date.now();
+
+    if (now - currentSubmission.shareData.lastShareTimestamp < MIN_SHARE_TIME_MS) {
+        document.getElementById('error-share-group').textContent = `Please wait ${MIN_SHARE_TIME_MS / 1000} seconds between shares.`;
+        return;
+    }
+    document.getElementById('error-share-group').textContent = '';
+
+    const normalizedGroup = groupName.trim().toLowerCase();
+    
+    let countedAsUnique = false;
+    if (normalizedGroup !== '' && currentSubmission.shareData.uniqueGroups.size < MAX_UNIQUE_GROUPS) {
+        if (!currentSubmission.shareData.uniqueGroups.has(normalizedGroup)) {
+            currentSubmission.shareData.uniqueGroups.add(normalizedGroup);
+            countedAsUnique = true;
+        }
+    }
+
+    let countedAsTotal = false;
+    if (currentSubmission.shareData.totalShares < MAX_TOTAL_SHARES) {
+        currentSubmission.shareData.totalShares++;
+        countedAsTotal = true;
+    }
+
+    if (countedAsTotal || countedAsUnique) {
+        currentSubmission.shareData.lastShareTimestamp = now;
+        saveData();
+        updateProgressUI();
+        
+        document.getElementById('group-name').value = '';
+    } else if (currentSubmission.shareData.totalShares >= MAX_TOTAL_SHARES && currentSubmission.shareData.uniqueGroups.size >= MAX_UNIQUE_GROUPS) {
+        document.getElementById('error-share-group').textContent = 'Share requirements already met!';
+    } else {
+        document.getElementById('error-share-group').textContent = 'This group name has already been counted, or the maximum share count has been reached.';
+    }
+}
+
+/**
+ * Handles the click on the manual "I Shared Successfully" button.
+ */
+function handleManualShareClick() {
+    const groupName = document.getElementById('group-name').value.trim();
+    if (groupName === '') {
+        document.getElementById('error-share-group').textContent = 'Please enter the group name or number you shared to.';
+        return;
+    }
+    
+    incrementShare(groupName);
+}
+
+/**
+ * Updates the visual progress bars and checks for completion.
+ */
+function updateProgressUI() {
+    const groupsProgress = currentSubmission.shareData.uniqueGroups.size;
+    const totalProgress = currentSubmission.shareData.totalShares;
+
+    document.getElementById('progress-groups').textContent = groupsProgress;
+    document.getElementById('progress-total').textContent = totalProgress;
+
+    const groupsPercent = Math.min(100, (groupsProgress / MAX_UNIQUE_GROUPS) * 100);
+    const totalPercent = Math.min(100, (totalProgress / MAX_TOTAL_SHARES) * 100);
+
+    document.getElementById('progress-bar-groups').style.width = `${groupsPercent}%`;
+    document.getElementById('progress-bar-total').style.width = `${totalPercent}%`;
+
+    const groupsChecklist = document.getElementById('groups-checklist');
+    const totalSharesChecklist = document.getElementById('total-shares-checklist');
+
+    if (groupsProgress >= MAX_UNIQUE_GROUPS) {
+        groupsChecklist.innerHTML = '<i class="fas fa-check-circle"></i> Complete';
+        groupsChecklist.classList.add('complete');
+    } else {
+        groupsChecklist.innerHTML = `<i class="fas fa-times-circle"></i> ${MAX_UNIQUE_GROUPS - groupsProgress} groups remaining`;
+        groupsChecklist.classList.remove('complete');
+    }
+
+    if (totalProgress >= MAX_TOTAL_SHARES) {
+        totalSharesChecklist.innerHTML = '<i class="fas fa-check-circle"></i> Complete';
+        totalSharesChecklist.classList.add('complete');
+    } else {
+        totalSharesChecklist.innerHTML = `<i class="fas fa-times-circle"></i> ${MAX_TOTAL_SHARES - totalProgress} shares remaining`;
+        totalSharesChecklist.classList.remove('complete');
+    }
+
+    if (groupsProgress >= MAX_UNIQUE_GROUPS && totalProgress >= MAX_TOTAL_SHARES) {
+        unlockMembershipKey();
+    }
+}
+
+
+// ===================================
+// 4. Unlocking and Key Generation (Page 3)
+// ===================================
+
+/**
+ * Generates a secure-looking alphanumeric key with dashes.
+ */
+function generateKey() {
+    const segments = 4;
+    const segmentLength = 4;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let key = 'FF-';
+
+    const generateSegment = () => {
+        let segment = '';
+        if (window.crypto && window.crypto.getRandomValues) {
+            const randomBytes = new Uint8Array(segmentLength);
+            window.crypto.getRandomValues(randomBytes);
+            for (let i = 0; i < segmentLength; i++) {
+                segment += chars[randomBytes[i] % chars.length];
+            }
+        } else {
+            for (let i = 0; i < segmentLength; i++) {
+                segment += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+        }
+        return segment;
+    };
+
+    for (let i = 0; i < segments; i++) {
+        if (i > 0) key += '-';
+        key += generateSegment();
+    }
+    
+    return key;
+}
+
+/**
+ * Triggers key generation and displays the success modal.
+ */
+function unlockMembershipKey() {
+    if (!currentSubmission.winKey) {
+        currentSubmission.winKey = generateKey();
+        saveData(); 
+    }
+    
+    document.getElementById('membership-key-output').textContent = currentSubmission.winKey;
+    successModal.classList.remove('hidden');
+    
+    whatsappShareBtn.disabled = true;
+    manualShareBtn.disabled = true;
+    
+    updateSubmissionLog();
+}
+
+
+// ===================================
+// 5. Success Modal Actions
+// ===================================
+
+/**
+ * Copies the key to the clipboard.
+ */
+function copyKey() {
+    const key = document.getElementById('membership-key-output').textContent;
+    navigator.clipboard.writeText(key).then(() => {
+        alert('Membership Key copied to clipboard!');
+    }).catch(err => {
+        console.error('Could not copy text: ', err);
+        alert('Failed to copy key. Please copy it manually.');
+    });
+}
+
+/**
+ * Prepares and sends the key to the user's own WhatsApp.
+ */
+function sendKeyViaWhatsapp() {
+    const key = document.getElementById('membership-key-output').textContent;
+    const message = `🎉 Here is your Free Fire Membership Key: ${key}. 
+Your membership will be activated within 24 hours.`;
+    
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+/**
+ * Downloads the key as a TXT file.
+ */
+function downloadKey() {
+    const key = document.getElementById('membership-key-output').textContent;
+    const filename = 'FreeFire_Membership_Key.txt';
+    const textContent = `Free Fire Christmas Membership Key:\n\n${key}\n\nActivation Note: Your membership will be activated within 24 hours. Please do not share this key publicly.`;
+    
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textContent));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+
+// ===================================
+// 6. Admin Panel (Hidden Feature)
+// ===================================
+
+/**
+ * Checks for the admin query parameter and enables the panel.
+ */
+function checkAdminPanel() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.get('admin') === 'true';
+    
+    if (isAdmin) {
+        switchPage('admin-panel'); 
+        loadAdminSubmissions();
+        document.getElementById('clear-localstorage-btn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear ALL local storage data for this site? This cannot be undone.')) {
+                localStorage.clear();
+                alert('Local storage cleared! Reloading page.');
+                window.location.reload();
+            }
+        });
+    }
+}
+
+/**
+ * Loads and displays submissions in the admin panel.
+ */
+function loadAdminSubmissions() {
+    const submissions = JSON.parse(localStorage.getItem(STORAGE_KEY_SUBMISSIONS) || '[]');
+    const list = document.getElementById('submission-list');
+    list.innerHTML = ''; 
+
+    if (submissions.length === 0) {
+        list.innerHTML = '<li>No submissions found in localStorage.</li>';
+        return;
+    }
+
+    submissions.forEach(sub => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>ID:</strong> ${sub.playerId} (${sub.membership})<br>
+            <strong>Key:</strong> <code style="color: ${sub.winKey ? 'green' : 'red'};">${sub.winKey || 'PENDING'}</code><br>
+            <strong>Progress:</strong> ${sub.uniqueGroups}/${MAX_UNIQUE_GROUPS} Groups | ${sub.totalShares}/${MAX_TOTAL_SHARES} Shares<br>
+            <small>Log Time: ${new Date(sub.timestamp).toLocaleString()}</small>
+            <hr>
+        `;
+        list.appendChild(li);
+    });
+}
+
+
+// ===================================
+// 7. Event Listeners & Initialization
+// ===================================
+
+/**
+ * Initialization function.
+ */
+function init() {
+    loadData(); 
+
+    checkAdminPanel();
+
+    if (currentSubmission.playerId && !document.getElementById('admin-panel').classList.contains('active')) {
+        displaySummary();
+        updateProgressUI();
+        switchPage('page-share');
+        if (currentSubmission.winKey) {
+            document.getElementById('membership-key-output').textContent = currentSubmission.winKey;
+            successModal.classList.remove('hidden');
+        }
+    }
+
+    form.addEventListener('submit', handleFormSubmit);
+
+    whatsappShareBtn.addEventListener('click', handleWhatsappShareClick);
+    
+    manualShareBtn.addEventListener('click', handleManualShareClick);
+    
+    document.getElementById('copy-key-btn').addEventListener('click', copyKey);
+    document.getElementById('whatsapp-key-btn').addEventListener('click', sendKeyViaWhatsapp);
+    document.getElementById('download-key-btn').addEventListener('click', downloadKey);
+    document.getElementById('close-modal-btn').addEventListener('click', () => successModal.classList.add('hidden'));
+
+    if (window.innerWidth >= 768 || new URLSearchParams(window.location.search).has('debug')) {
+        debugPanel.classList.remove('hidden');
+    }
+    
+    document.getElementById('debug-share-btn').addEventListener('click', () => {
+        if (currentSubmission.shareData.totalShares < MAX_TOTAL_SHARES) {
+            currentSubmission.shareData.totalShares++;
+            saveData();
+            updateProgressUI();
+        }
+    });
+
+    document.getElementById('debug-group-btn').addEventListener('click', () => {
+        if (currentSubmission.shareData.uniqueGroups.size < MAX_UNIQUE_GROUPS) {
+            currentSubmission.shareData.uniqueGroups.add(`debug-group-${Date.now()}`);
+            saveData();
+            updateProgressUI();
+        }
+    });
+
+    if (localStorage.length === 0 && currentSubmission.playerId) {
+        console.warn("Local storage seems to be clear. Share progress will be lost.");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', init);age switch
     }
 }
 
